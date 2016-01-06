@@ -1,0 +1,270 @@
+{template 'common/header'}
+<div class="main">
+    {if $op == 'edit'}
+    <div class="panel panel-info">
+        <div class="panel-heading">{if $id > 0}修改{else}添加{/if}奖品
+            <div style="float: right">
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('Prizes',array('group_id'=>$group_id))}">奖品列表</a>&nbsp;&nbsp;
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('PrizesGroup',array('op'=>'add'))}">添加奖品组</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post" class="form-horizontal form" ng-controller="prizeForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">奖品名称</label>
+                    <div class="col-sm-4">
+                        <input type="text" name="prize[prize_name]" class="form-control" value="{$prize['prize_name']}" />
+                    </div>
+                    <label class="col-sm-1 control-label">奖品概率</label>
+                    <div class="col-sm-2">
+                        <div class="input-group">
+                            <input type="text" name="prize[prize_possibility]" class="form-control" value="{$prize['prize_possibility']}" maxlength="3"/>
+                            <div class="input-group-addon">%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">有效期</label>
+                    <div class="col-sm-3">
+                        <input name="prize[prize_validity]" class="form-control" type="date" value="{php echo date('Y-m-d', $prize['prize_validity'])}"/>
+                    </div>
+                    <label class="col-sm-1 control-label">领奖状态</label>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="prize[status]" value="0" {if $prize['status']==0} checked="checked" {/if}/>未领取&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="prize[status]" value="-1" {if $prize['status']==-1} checked="checked" {/if}/>已发放&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="prize[status]" value="-2" {if $prize['status']==-2} checked="checked" {/if}/>已使用
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属组</label>
+                    <div class="col-sm-5">
+                        {loop $groups $item}
+                        <label class="radio-inline">
+                            <input type="radio" name="prize[group_id]" value="{$item[id]}" {if $prize['group_id']==$item[id]} checked="checked" {/if}/>
+                            {$item[name]}
+                        </label>
+                        {/loop}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">领奖口令</label>
+                    <div class="col-sm-4" style="line-height: 25px">
+                        {if $id <= 0}
+                        <textarea class="form-control" rows="5" name="prize[prize_code]">{$prize['prize_code']}</textarea>
+                        <span class="help-block">每行一个口令,例:<br/> <code>875543354288<br/>875543354288</code><br/></span>
+                        {else}
+                            {loop $prize['record'] $item}
+                                {if $item['uid'] <> 0}<code style="font-size: 14px">{$item['code']}</code>{else}{$item['code']}{/if} <br/>
+                            {/loop}
+                        <span class="help-block">无法修改 <br/>已发放的用红色表示 <code>875543354288</code><br/></span>
+                        {/if}
+
+                    </div>
+
+                    <label class="col-sm-1 control-label">二维码</label>
+                    <div class="col-sm-3">
+                        {php echo tpl_form_field_image('prize_code_image', $prize['prize_code_image'])}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">使用详情</label>
+                    <div class="col-sm-9">
+                        <textarea style="height:100px;" class="form-control" name="prize[description]" cols="70">{$prize['description']}</textarea>
+                    </div>
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <input name="edit" type="submit" value="提交" class="btn btn-primary " />
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+                    <input type="hidden" name="prize[id]" value="{$prize['id']}" />
+                </div>
+            </form>
+        </div>
+    </div>
+    {elseif $op=='import'}
+    <div class="panel panel-info">
+        <div class="panel-heading">导入奖品</div>
+        <div class="panel-body">
+            <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">奖品列表</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" rows="7" name="prize_content">{$content}</textarea>
+                    </div>
+                    <span class="help-block">每行一个奖品,用逗号方式分开 <br/>格式：奖品名称,概率,口令 <br/>例: <code>支付宝10元红包口令,1,875543354288</code><br/></span>
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <div class="col-sm-6">
+                        <input name="import" type="submit" value="导入" class="btn btn-primary " />&nbsp;&nbsp;
+                        <a href="{php echo $this->createWebUrl('prizes',array('op'=>'edit','id'=>0))}" class="btn btn-primary ">添加一个</a>
+                        <input type="hidden" name="token" value="{$_W['token']}" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {elseif $op == 'record'}
+    <script type="text/javascript">
+        require(['bootstrap.switch', 'util'], function($, u){
+            $(function(){
+                $(':checkbox').bootstrapSwitch();
+                $(':checkbox').on('switchChange.bootstrapSwitch', function(e, state){
+                    $this = $(this);
+                    var dat = $this.attr('data');
+                    var fieldmap = $this.attr('fieldmap');
+                    var ret = this.checked ? 1 : 0;
+                    $.post(location.href, {fieldmap:fieldmap,dat: dat, ret: ret}, function(resp){
+                        if(resp != 'success') {
+                            u.message('操作失败, 请稍后重试.')
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    <div class="panel panel-info">
+        <div class="panel-heading">{$prize['prize_name']} 奖品——中奖记录,概率:{$prize['prize_possibility']}%
+            <div style="float: right">
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('prizes')}">返回</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <table class="table table-hover">
+                    <thead class="navbar-inner">
+                        <tr>
+                            <th style="min-width:35px;">ID</th>
+                            <th>兑换码</th>
+                            <th>帐号</th>
+                            <th style="width:160px;">中奖时间</th>
+                            <th style="width:160px;">释放(用户放弃)</th>
+                            <th style="width:90px;">发放状态</th>
+                            <th style="width:200px;">奖品发放(只能发放一次)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {loop $prize['record'] $item}
+                    {if !empty($_GPC[r_id])}
+                        {if $item[id]==$_GPC[r_id]}
+                        <tr>
+                            <td>{$item['id']}</td>
+                            <td width="30%">{$item['code']}</td>
+                            {php $u=getUserFieldsByUid($item['uid'],array('nickname','email'));}
+                            <td>{if empty($u['nickname'])}{$u['email']}{else}{$u['nickname']}{/if}</td>
+                            <td>{if !empty($item['winning_time'])}{php echo date('Y-m-d',$item['winning_time'])}{else}-{/if}</td>
+                            <td>
+                                {if $item['status'] == 1}
+                                <input type="checkbox" fieldmap="release"  value="-1"{if intval($item['status'])==0} checked="checked"{/if} data="{php echo base64_encode(json_encode($item));}"/>
+                                {else}
+                                -
+                                {/if}
+                            </td>
+                            <td>
+                                {if $item['status'] == -1}
+                                <span class="label label-danger">已发放</span>
+                                {else}
+                                <span class="label label-success">未发放</span>
+                                {/if}
+                            </td>
+                            <td>
+                                {if $item['status'] == 1}
+                                <input type="checkbox" fieldmap="status"  value="-1"{if intval($item['status'])==-1} checked="checked"{/if} data="{php echo base64_encode(json_encode($item));}"/>
+                                {/if}
+                            </td>
+                        </tr>
+                        {/if}
+                    {else}
+                    <tr>
+                        <td>{$item['id']}</td>
+                        <td width="30%">{$item['code']}</td>
+                        {php $u=getUserFieldsByUid($item['uid'],array('nickname','email'));}
+                        <td>{if empty($u['nickname'])}{$u['email']}{else}{$u['nickname']}{/if}</td>
+                        <td>{if !empty($item['winning_time'])}{php echo date('Y-m-d',$item['winning_time'])}{else}-{/if}</td>
+                        <td>
+                            {if $item['status'] == 1}
+                            <input type="checkbox" fieldmap="release"  value="-1"{if intval($item['status'])==0} checked="checked"{/if} data="{php echo base64_encode(json_encode($item));}"/>
+                            {else}
+                            -
+                            {/if}
+                        </td>
+                        <td>
+                            {if $item['status'] == -1}
+                            <span class="label label-danger">已发放</span>
+                            {else}
+                            <span class="label label-success">未发放</span>
+                            {/if}
+                        </td>
+                        <td>
+                            {if $item['status'] == 1}
+                            <input type="checkbox" fieldmap="status"  value="-1"{if intval($item['status'])==-1} checked="checked"{/if} data="{php echo base64_encode(json_encode($item));}"/>
+                            {/if}
+                        </td>
+                    </tr>
+                    {/if}
+                    {/loop}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {else}
+    <div class="panel panel-info">
+        <div class="panel-heading">领奖品列表
+            <div style="float: right">
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('prizes',array('op'=>'edit','id'=>0,'group_id'=>$group_id))}">添加奖品</a>&nbsp;&nbsp;
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('PrizesGroup')}">返回</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead class="navbar-inner">
+                <tr>
+                    <th style="min-width:35px;">ID</th>
+                    <th>奖品名称</th>
+                    <th style="width:80px;">概率</th>
+                    <th style="width:90px;">份数</th>
+                    <th style="width:90px;">已发</th>
+                    <th style="width:110px;">添加时间</th>
+                    <th style="width:110px;">到期</th>
+                    <th style="width:300px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loop $list $item}
+                <tr>
+                    <td>{$item['id']}</td>
+                    <td style="width: 30%">
+                        {if $item['status'] == 0}
+                        <span class="label label-primary">未发放</span>
+                        {elseif $item['status'] == -1}
+                        <span class="label label-success">已发放</span>
+                        {elseif $item['status'] == -2}
+                        <span class="label label-danger">已使用</span>
+                        {/if}
+                        {$item['prize_name']}
+                    </td>
+                    <td>{$item['prize_possibility']}%</td>
+                    <td>{$item['number']}份</td>
+                    <td>{$item['issued_number']}份</td>
+                    <td>{php echo date('Y-m-d',$item['create_time'])}</td>
+                    <td>{php echo date('Y-m-d',$item['prize_validity'])}</td>
+                    <td class="text-right">
+                        <div class="btn-group text-left">
+                            {if $item['status'] == 0}
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('prizes',array('op'=>'edit','id'=>$item['id'],'group_id'=>$group_id))}" title="编辑"><i class="fa fa-edit"></i>编辑</a>
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('prizes',array('op'=>'delete','id'=>$item['id']))}" title="删除" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i> 删除</a>
+                            {/if}
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('prizes',array('op'=>'record','id'=>$item['id']))}" title="查看详情"><i class="fa fa-share"></i>查看详情</a>
+                        </div>
+                    </td>
+                </tr>
+                {/loop}
+                </tbody>
+            </table>
+            {$pager}
+        </div>
+    </div>
+    {/if}
+</div>
+{template 'common/footer'}

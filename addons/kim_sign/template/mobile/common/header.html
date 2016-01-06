@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>{if !empty($_W['page']['title'])}{$_W['page']['title']} - {/if}{if !empty($_W['page']['sitename'])}{$_W['page']['sitename']} - {/if}{if !empty($_W['account']['name'])}{$_W['account']['name']}{/if}</title>
+	<meta name="format-detection" content="telephone=no, address=no">
+	<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+	<meta name="apple-touch-fullscreen" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="keywords" content="{if empty($_W['page']['keywords'])}微赞,微信,微信公众平台{else}{$_W['page']['keywords']}{/if}" />
+	<meta name="description" content="{if empty($_W['page']['description'])}公众平台自助引擎，简称微赞，微赞是一款免费开源的微信公众平台管理系统，是国内最完善移动网站及移动互联网技术解决方案。{else}{$_W['page']['description']}{/if}" />
+	<link href="./resource/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./resource/css/font-awesome.min.css" rel="stylesheet">
+	<link href="./resource/css/animate.css" rel="stylesheet">
+	<link href="./resource/css/common.css" rel="stylesheet">
+	<link href="{url 'utility/style'}" rel="stylesheet">
+	<script src="./resource/js/require.js"></script>
+	<script src="./resource/js/app/config.js"></script>
+</head>
+<body>
+    {template 'common/header-nav'}
+	<div class="container container-fill">

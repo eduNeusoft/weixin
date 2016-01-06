@@ -1,0 +1,84 @@
+{template 'header'}
+
+<style>
+
+    body {
+
+        background: url("{$_W['siteroot']}addons/xc_heka/resource/images/bg1.png") 0 0 no-repeat;
+
+        background-size: cover;
+
+    }
+
+</style>
+
+
+
+<div class="htmleaf-container">
+
+    <header class="htmleaf-header">
+
+        <h1>老师您辛苦了 <span>献给亲爱的{$res['techname']}老师</span></h1>
+
+    </header>
+
+    <div class="htmleaf-content">
+
+        <canvas class="snow-canvas" speed="1" interaction="false" size="2" count="80" opacity="0.00001" start-color="rgba(253,252,251,1)" end-color="rgba(251,252,253,0.3)" wind-power="0" image="false" width="1366" height="667"></canvas>
+
+        <canvas class="snow-canvas" speed="3" interaction="true" size="6" count="30" start-color="rgba(253,252,251,1)" end-color="rgba(251,252,253,0.3)" opacity="0.00001" wind-power="2" image="false" width="1366" height="667"></canvas>
+
+        <canvas class="snow-canvas" speed="3" interaction="true" size="12" count="20" wind-power="-5" image="{$_W['siteroot']}addons/xc_heka/resource/images/snow.png" width="1366" height="667"></canvas>
+
+        <div class="related">
+
+            <img src="{$_W['siteroot']}attachment/{$res[images]}" style="border-radius: 10px; width:50%;" />
+
+            <p>{$res[huayu]}</p>
+
+        </div>
+
+    </div>
+
+    <div style="margin:30px 0">
+
+
+
+            <button type="submit" class="btn btn-primary btn-lg" name="submit" value="就它了，直接发送">就它了，直接发送</button>
+
+            <a class="btn btn-warning btn-lg" name="submit" href="{php echo $this->createMobileUrl('myxinxi', array('act'=>'display'));}"  value="返回重来">我要制作</a>
+
+
+
+    </div>
+
+</div>
+
+
+
+<script src="http://libs.useso.com/js/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+
+<script src="{__JS__}/snow-plugin.js"></script>
+
+<script>
+
+    $(function(){
+
+        $(".snow-canvas").snow();
+
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+{template 'footer'}
+

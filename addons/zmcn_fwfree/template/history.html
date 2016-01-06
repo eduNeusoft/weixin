@@ -1,0 +1,98 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $foo == 'post'}class="active"{/if}><a href="javascript:;">查询明细</a></li>
+	<li {if $foo == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('zmfwcaa', array('foo' => 'display'))}">查询管理</a></li>
+</ul>
+{if $foo == 'display'}
+<style>
+.label{cursor:pointer;}
+</style>
+<div class="main">
+
+  <div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="text-align:center; width:50px;">ID</th>
+					<th style="text-align:center; width:200px;">密码</th>
+					<th style="text-align:center; width:100px;">方式</th>
+					<th style="text-align:center; width:60px;">次数</th>
+					<th style="text-align:center; width:150px;">会员</th>
+					<th style="text-align:center; width:50px;">性别</th>
+					<th style="text-align:center; width:130px;">地区</th>
+					<th style="text-align:center; width:100px;">时间</th>	
+					<th style="text-align:center; width:130px;">IP/终端</th>	
+					<th style="text-align:center; width:180px;">属性</th>					
+					<th style="text-align:center; min-width:100px;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+				<tr style="text-align:center;">				
+				   <td style="text-align:center;">{$row['id']}</td>
+				   <td style="text-align:center;">{$row['code']} </td>
+					<td style="text-align:center;">{php echo zm_get_caitype($row['type'])}</td>
+				   <td style="text-align:center;">{$row['num']} </td>
+					<td style="text-align:center;">{php echo zm_get_username($row['userid'])}</td>
+					<td style="text-align:center;">
+					{if $row['gender'] == 1}<span class="label label-info">男</span>{elseif $row['gender'] == 2}<span class="label label-danger">女</span>{else}<span class="label label-default">未知</span>{/if}
+					</td>
+					<td style="text-align:center;">{$row['province']}<br>{$row['city']}</td>
+					<td style="text-align:center;">{php echo date('Y-m-d', $row['addtime'])}<br>{php echo date('H:i:s', $row['addtime'])}</td>
+					<td style="text-align:center;">{$row['ip']}<br>{$row['os']} {$row['container']}</td>
+					<td style="text-align:center;">
+					{if $row['num'] == 1}<span class="label label-success">首次</span>{elseif  (int)$settings['upperlimit'] !=0 && (int)$row['num'] > (int)$settings['upperlimit']}<span class="label label-warning">超限</span>{else}<span class="label label-info">多次</span>{/if}
+					{if $row['isvalid'] == 1}<span class="label label-default">失效</span>{/if}
+					{if $row['iserr'] == 1}<span class="label label-warning">跨区</span>{/if}
+					</td>					
+					<td style="text-align:center;"><a rel="tooltip" href="{php echo $this->createWebUrl('zmfwcaa', array('id' => $row['id'], 'foo' => 'post'))}" title="明细" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="明细"><i class="fa fa-calendar"></i></a> <a rel="tooltip" href="{php echo $this->createWebUrl('zmfwcaa', array('id' => $row['id'], 'foo' => 'close'))}" title="禁用" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="禁用"><i class="fa fa-lock"></i></a> <a href="{php echo $this->createWebUrl('zmfwcaa', array('id' => $row['id'], 'foo' => 'delete'))}" onclick="return confirm('删除后该密码将作为新密码重新可被查询，此操作不可恢复，确认删除？');return false;" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-times"></i></a>
+					</td>
+				</tr>
+				{/loop}	
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+  </div>
+</div>
+{elseif $foo == 'post'}
+<style>
+.label{cursor:pointer;}
+</style>
+<div class="main">
+  <div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="text-align:center; width:50px;">ID</th>
+					<th style="text-align:center; width:200px;">操作员</th>
+					<th style="text-align:center; width:150px;">时间</th>
+					<th style="text-align:center; width:360px;">内容</th>
+					<th style="text-align:center; width:100px;">IP</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+				<tr style="text-align:center;">				
+				   <td style="text-align:center;">{$row['id']}</td>
+				   {if  $row['type'] == 0}
+						<td style="text-align:center;">{php echo zm_get_username($row['uid'])}</td>
+				   {else}
+					    <td style="text-align:center;">{php echo zm_get_webusername($row['uid'])}</td>			   
+				   {/if}
+					<td style="text-align:center;">{php echo date('Y-m-d H:i:s', $row['addtime'])}</td>
+				   <td style="text-align:center;">{$row['remark']} </td>
+					<td style="text-align:center;">{$row['ip']}</td>
+				</tr>
+				{/loop}	
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+  </div>
+</div>
+
+{/if}
+{template 'common/footer'}

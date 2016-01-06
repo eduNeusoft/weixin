@@ -1,0 +1,27 @@
+
+============通用类========================
+全站LOGO	{$_W['attachurl']}{$settings['logo']}
+全站banner	{$_W['attachurl']}{$settings['banner']}
+关注二维码	{$settings['link']}
+欢迎语标题	{$settings['welcome']}
+公司名称	{$settings['factory']}
+公司简介	{$settings['profile']}
+客服电话	{$settings['ftel']}
+打假电话	{$settings['dtel']}
+抽奖活动开关	{$settings['isluck']}    	(0:不起用  1:起用)
+抽奖活动名称	{$settings['luckname']}
+公众号名称	{$_W['account']['name']}
+网站网址	{$_W['siteroot']}		（http://www.xxx.com/）
+模块网址	{MODULE_URL}			（http://www.xxx.com/addons/zmcn_fwfree/）
+
+==========验证页=================
+商品名称	{$batch['product']}
+企业名称	{$batch['factory']}
+商品品牌	{$batch['brand']}
+广告视频	{$batch['video']}
+购买链接	{$batch['buylink']}
+商品主图	{$_W['attachurl']}{$batch['logo']}
+Banner图	{$_W['attachurl']}{$batch['banner']}
+
+查询结果标题	{$fgltle}
+查询结果内容	{$fgltxt}

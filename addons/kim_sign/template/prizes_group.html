@@ -1,0 +1,91 @@
+{template 'common/header'}
+<div class="main">
+    {if $op == 'edit' || $op == 'add'}
+    <div class="panel panel-info">
+        <div class="panel-heading">{if $id > 0}修改{else}添加{/if}奖品组信息
+            <div style="float: right">
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('PrizesGroup')}">奖品组列表</a>&nbsp;&nbsp;
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="" method="post" class="form-horizontal form" ng-controller="prizeForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">奖品组名</label>
+                    <div class="col-sm-2">
+                        <input type="text" name="group[name]" class="form-control" value="{$group['name']}" />
+                    </div>
+                    <label class="col-sm-1 control-label">状态</label>
+                    <div class="col-sm-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="group[is_del]" value="0" {if $group['is_del']==0} checked="checked" {/if}/>正常&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" name="group[is_del]" value="-1" {if $group['is_del']==-1} checked="checked" {/if}/>删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <input name="edit" type="submit" value="提交" class="btn btn-primary " />
+                        <input type="hidden" name="token" value="{$_W['token']}" />
+                        <input type="hidden" name="group[create_time]" value="{$group['create_time']}" />
+                        <input type="hidden" name="group[id]" value="{$group['id']}" />
+                    </div>
+                </div>
+            </form>
+            <script type="text/javascript">
+                var editor;
+                require(['jquery','util'],function($, u) {
+                    $(function () {
+                        u.editor($('.richtext')[0], function (elm, e) {
+                            editor = e;
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    {else}
+    <div class="panel panel-info">
+        <div class="panel-heading">奖品组列表
+            <div style="float: right">
+                <a class="btn btn-info" style="padding: 5px 7px;display: inline" href="{php echo $this->createWebUrl('PrizesGroup',array('op'=>'add'))}">添加奖品组</a>
+            </div>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead class="navbar-inner">
+                <tr>
+                    <th style="min-width:35px;">ID</th>
+                    <th>组名</th>
+                    <th style="width:160px;">添加时间</th>
+                    <th style="width:60px;">状态</th>
+                    <th style="width:300px;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {loop $list $item}
+                <tr>
+                    <td>{$item['id']}</td>
+                    <td style="width: 50%">{$item['name']}</td>
+                    <td>{php echo date('Y-m-d',$item['create_time'])}</td>
+                    <td>
+                        {if $item['is_del'] == 0}
+                        <span class="label label-success">正常</span>
+                        {elseif $item['is_del'] == -1}
+                        <span class="label label-danger">已删除</span>
+                        {/if}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group text-left">
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('prizes',array('op'=>'display','group_id'=>$item['id']))}" title="奖品列表"><i class="fa fa-share"></i>奖品列表</a>
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('PrizesGroup',array('op'=>'edit','id'=>$item['id']))}" title="编辑"><i class="fa fa-edit"></i>编辑</a>
+                            <a class="btn btn-default btn-sm" href="{php echo $this->createWebUrl('PrizesGroup',array('op'=>'delete','id'=>$item['id']))}" title="删除" onclick="return confirm('此操作不可恢复，确认删除？');return false;"><i class="fa fa-times"></i> 删除</a>
+                        </div>
+                    </td>
+                </tr>
+                {/loop}
+                </tbody>
+            </table>
+            {$pager}
+        </div>
+    </div>
+    {/if}
+</div>
+{template 'common/footer'}

@@ -1,0 +1,68 @@
+{template 'common/header'}
+<div class="main">
+    <div class="panel panel-info">
+        <div class="panel-heading">签到设置</div>
+        <div class="panel-body">
+            <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">奖励类型</label>
+                    <div class="col-sm-9">
+                        {loop $credits[creditnames] $key $item}
+                            {if $item[enabled] == 1}
+                                <label class="radio-inline">
+                                    <input type="radio" name="credit_type" value="{$key}" {if $settings['credit_type']==$key} checked="checked" {/if}/>
+                                    {$item[title]}
+                                </label>
+                            {/if}
+                        {/loop}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 control-label">奖品组</label>
+                    <div class="col-sm-3">
+                        {loop $groups $item}
+                        <label class="radio-inline">
+                            <input type="radio" name="prize_group" value="{$item[id]}" {if $settings['prize_group']==$item[id]} checked="checked" {/if}/>
+                            {$item[name]}
+                        </label>
+                        {/loop}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 control-label">24小时内可签到</label>
+                    <div class="col-sm-2 col-xs-12">
+                        <div class="input-group">
+                            <input type="text" name="times" class="form-control" value="{$settings['times']}" maxlength="3"/>
+                            <div class="input-group-addon">次</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">签到奖励</label>
+                    <div class="col-sm-2">
+                        <input type="text" name="credit" class="form-control span4" value="{$settings['credit']}" />
+                    </div>
+                    <label class="col-sm-1 control-label">排行榜前</label>
+                    <div class="col-sm-2">
+                        <input type="text" name="rank" class="form-control span4" value="{$settings['rank']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">签到时间范围</label>
+                    <div class="col-sm-3"><input name="start_time" type="time" id="example_2" class="form-control" value="{$settings['start_time']}" /></div>
+                    <div class="col-sm-3"><input name="end_time" class="form-control" type="time" id="example_9" value="{$settings['end_time']}" /></div>
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <input name="submit" type="submit" value="提交" class="btn btn-primary " />
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="./source/modules/kim_sign/template/style/js/jquery-ui.js"></script>-->
+<!--<script type="text/javascript" src="./source/modules/kim_sign/template/style/js/jquery-ui-slide.min.js"></script>-->
+<!--<script type="text/javascript" src="./source/modules/kim_sign/template/style/js/jquery-ui-timepicker-addon.js"></script>-->
+<!--<script type="text/javascript">$(function(){	$('#example_1').datetimepicker();	$('#example_2').timepicker({});	$('#example_9').timepicker({});	$('#example_3').datetimepicker({	    showSecond: true,	    showMillisec: true,	    timeFormat: 'hh:mm:ss:l'    });	$('#example_4').timepicker({	    ampm: true,	    hourMin: 8,	    hourMax: 16    });	$('#example_5').datetimepicker({	   hour: 13,	   minute: 15    });	$('#example_6').datetimepicker({	   numberOfMonths: 2,	   minDate: 0,	   maxDate: 30    });	$('#example_7').timepicker({	   hourGrid: 4,	   minuteGrid: 10    });		var ex8 = $('#example_8');      ex8.datetimepicker();      $('#example_8_set_btn').click(function(){	      ex8.datetimepicker('setDate', (new Date()) );      });      $('#example_8_get_btn').click(function(){	       alert(ex8.datetimepicker('getDate'));      });});</script>-->
+{template 'common/footer'}

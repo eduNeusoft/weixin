@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title></title>
+    <script src="{MODULE_URL}template/mobile/js/jquery-1.10.1.min.js?{timestamp}"></script>
+    <!--<script src="js/hidpi-canvas.js"></script>-->
+    <script src="{MODULE_URL}template/mobile/js/game.js?{timestamp}"></script>
+    <style>
+        *{padding: 0;margin: 0;}
+        a{outline: medium;}
+        canvas{vertical-align: top;}
+        #finger{position: fixed;left: 0;bottom: 0;width: 100%;height: 100px;z-index: 100;display: none;}
+        #finger span{display: block;float: left;height: 100%;width: 50%;-webkit-box-sizing:border-box;}
+        #finger span#finger-left.on{background: url("{MODULE_URL}template/mobile/img/game.png") 50% 0% / 225px 245px no-repeat;}
+        #finger span#finger-right.on{background: url("{MODULE_URL}template/mobile/img/game.png") 50% -100px / 225px 245px no-repeat;}
+        #finger #start{width: 100%;height: 100%;background-color: transparent;position: absolute;left: 0;top: 0;}
+        .g-pace{display: none;position:absolute;left:0;bottom:0;width:100%;height:15%;padding:0 3px;box-sizing:border-box;-webkit-box-sizing:border-box}.g-pace dd,.g-pace dt{position:relative;float:left;width:50%;height:100%;padding:10px 3px;overflow:hidden;box-sizing:border-box;-webkit-box-sizing:border-box}.g-pace dt{padding-right:5px}.g-pace dd{padding-left:5px}.g-pace a{display:block;height:100%;background:#ffba15 url({MODULE_URL}template/mobile/img/foot.png) no-repeat center;background-size:22px 43px;border:3px solid #fff;border-radius:3px;box-sizing:border-box;-webkit-box-sizing:border-box}.g-pace dt a{-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-transform:skew(3deg,0deg)}.g-pace dd a{background-color:#3088e2;-moz-transform:scaleX(-1) skew(3deg,0deg);-webkit-transform:scaleX(-1) skew(3deg,0deg);-o-transform:scaleX(-1) skew(3deg,0deg);transform:scaleX(-1) skew(3deg,0deg);filter:FlipH}.g-pace dd a.sel,.g-pace dt a.sel{background-color:#8a8a8a}
+        #ready{display: none;position: fixed;top: 10%;left: 0;width: 100%;height: 30px;padding-top: 50px;font-weight: 700;font-size: 24px;line-height: 30px;color: #ff522e;text-align: center;text-shadow: #fff 1px 1px,#fff 1px -1px,#fff -1px 1px,#fff -1px -1px;background: url({MODULE_URL}template/mobile/img/game.png) 50% -200px / 225px 245px no-repeat;}
+        #score{display: none;position: fixed;left: 0;top: 0;font-weight: 700;font-size: 24px;line-height: 30px;color: #ff522e;text-align: center;text-shadow: #fff 1px 1px,#fff 1px -1px,#fff -1px 1px,#fff -1px -1px;}
+        #second{display: none;position: fixed;top: 0;left: 50%;margin-left: -80px;font-size: 49px;color: #1d81b0;font-weight: 700;text-shadow: #fff 3px 3px,#fff 3px -3px,#fff -3px 3px,#fff -3px -3px;width: 160px;text-align: center;}
+		#g-voiceover {text-align: center;width: 100%;height: 100px;font-size: 18px;color: #1d81b0;font-weight: 700;-shadow: #fff 1px 1px,#fff 1px -1px,#fff -1px 1px,#fff -1px -1px;}
+		#g-music {position: fixed;right: 10px;top: 10px;width: 25px;height: 25px;}
+		.g-musicon {background: url(./../addons/wmb_run/template/mobile/img/music.png);background-size: 100% 100%;}
+	</style>
+</head>
+<body>
+
+<input type="hidden" id="runremurl" value ="{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileUrl('add',array('nickname'=>$nickname,'headimgurl'=>$headimgurl,'openid'=>$openid,'giftid'=>$giftid,'themeid' => $theme['id'],'openid'=>$openid,'helpid'=>$whoid)))}" />
+<input type="hidden" id="spkeindex" value ="{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileUrl('index',array('giftid'=>$giftid,'themeid' => $themeid,'nickname'=>$nickname,'headimgurl'=>$headimgurl,'openid'=>$openid,'helpid'=>$whoid)))}" />
+<!--跳到分享-->
+<input type="hidden" id="openid" value="{$whoid}"/>
+<input type="hidden" id="shareurl" value="{php echo  $_W['siteroot'].str_replace('./','app/',$this->createMobileUrl('share',array('giftid'=>$giftid,'themeid' => $themeid,'whoid'=>$helpid)))}"/>
+<input type="hidden" id = "shareurli" value ="{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileUrl('index',array('giftid'=>$giftid,'themeid' => $themeid,'openid'=>$openid,'whoid'=>$helpid)))}";
+<div id="game">
+	<div id="g-music" class="g-musicon"><audio id="music" src="./../addons/wmb_run/template/mobile/img/2.mp3" autoplay loop ></audio></div>
+    <canvas id="gameCanvas"></canvas>
+    <div id="ready">点击踏板开始游戏</div>
+	
+    <dl class="g-pace">
+        <dt>
+            <a id="pace-left" href="javascript:void(0);"></a>
+        </dt>
+        <dd>
+            <a id="pace-right" href="javascript:void(0);"></a>
+        </dd>
+    </dl>
+    <div id="finger">
+        <span id="finger-left"></span>
+        <span id="finger-right"></span>
+        <div id="start"></div>
+    </div>
+    <div id="second">
+        <span>10s</span>
+		<div id="g-voiceover">别发呆了起来嗨！</div>
+    </div>
+    <div id="score">
+        <span>0m</span>
+    </div>
+</div>
+</body>
+ <script type="text/javascript">
+ $(function(){
+	var i = 0;
+	$('#g-music').bind('click',function(){
+		i++;
+		if(i == 1){
+			$('#music')[0].pause();
+		}else if(i == 2){
+			$('#music')[0].play();
+			i = 0;
+		}		
+	})
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+							//WeixinJSBridge.call('hideToolbar');
+                            WeixinJSBridge.call('hideOptionMenu');
+             });
+			 });
+</script>
+</html>

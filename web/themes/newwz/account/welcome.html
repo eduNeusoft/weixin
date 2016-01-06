@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{if !empty($_W['page']['title'])}{$_W['page']['title']} - {/if}{if !empty($_W['page']['copyright']['sitename'])}{$_W['page']['copyright']['sitename']}{/if}</title>
+<meta name="keywords" content="{if empty($_W['page']['copyright']['keywords'])}{if IMS_FAMILY != 'x'}锦尚中国微信营销,微信,微信公众平台{/if}{else}{$_W['page']['copyright']['keywords']}{/if}">
+<meta name="description" content="{if empty($_W['page']['copyright']['description'])}{if IMS_FAMILY != 'x'}微信公众平台自助引擎，简称锦尚中国微信营销，锦尚中国微信营销是一款开源的微信公众平台管理系统。{/if}{else}{$_W['page']['copyright']['description']}{/if}">
+<link rel="shortcut icon" href="/favicon.ico">
+<link type="text/css" rel="stylesheet" href="./resource/newwz/css/font.css">
+<link type="text/css" rel="stylesheet" href="./resource/newwz/css/flow_public.css">
+<link type="text/css" rel="stylesheet" href="./resource/newwz/css/index.css">
+<script src="./resource/newwz/js/hm.js"></script>
+<script type="text/javascript" src="./resource/newwz/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="./resource/newwz/js/main.js"></script>
+<script src="./resource/newwz/js/swfobject_modified.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="js/DD_belatedPNG_0.0.8a.js"></script>
+<script>
+DD_belatedPNG.fix('.menu_top img');
+DD_belatedPNG.fix('.num');
+DD_belatedPNG.fix('.line');
+DD_belatedPNG.fix('.harddisk_wrap .harddisk_bg');
+DD_belatedPNG.fix('.data_wrap .data_bg');
+DD_belatedPNG.fix('.data_wrap .back2_circle_l, .data_wrap .back2_circle_r');
+DD_belatedPNG.fix('.data_person1');
+DD_belatedPNG.fix('.data_person2');
+DD_belatedPNG.fix('.eyes_person1');
+DD_belatedPNG.fix('.eyes_person2');
+DD_belatedPNG.fix('.environment_bg');
+DD_belatedPNG.fix('.menu_top .btn_login');
+
+
+</script>
+<![endif]-->
+</head>
+
+<body style="">
+<!-- <div class="ad_top">
+	<h1 title="云公测季节，强势来袭"><a id="btn_full" href="#"><span></span><span></span></a></h1>
+</div> -->
+<!-- 头部菜单 -->
+<script src="./resource/newwz/flowhead.js"></script>
+<div class="menu_top">
+  <div class="w1100 mm">
+	<div class="fl">
+    	<h1 class="fl logo"><a href="/"><img src="{if !empty($_W['setting']['copyright']['flogo'])}{php echo tomedia($_W['setting']['copyright']['flogo']);}{else}./resource/newwz/images/ACCLOUD_lOGO_white.png{/if}" /></a></h1>
+    </div>
+    <div class="fr f16">
+    	<ul class="fl pt6">
+        	<li><a href="/"><span class="menu_line line-right"></span><span class="menu_line line-left"></span>首页</a></li>
+        	<li><a href="/vip/cases.html"><span class="menu_line line-right"></span><span class="menu_line line-left"></span>案例展示</a></li>
+        	<li><a href="/vip/baojia.html"><span class="menu_line line-right"></span><span class="menu_line line-left"></span>服务套餐</a></li>
+        	<li class="pr">
+            	<a href="/vip/" target="_blank"><span class="menu_line line-right"></span><span class="menu_line line-left"></span>关于我们</a>
+            </li>
+			<li><a href="/vip/dingzhi.html"><span class="menu_line line-right"></span><span class="menu_line line-left"></span>高级定制</a></li>
+        
+         	{if !empty($settings['register']['open'])}
+			<li class="pr">
+            	<a class="menu_blog" href="{url 'user/register'}">
+				<span class="menu_line line-right"></span>
+				<span class="menu_line line-left"></span>注册试用</a>
+            </li>
+			{/if}
+        </ul>
+        <ul class="fr pt10">
+        	<li><a class="btn_login" href="{url 'user/login'}">会员登入</a></li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 头部菜单 end -->
+
+<!-- 右边点点菜单 -->
+<div class="fixed_r">
+  <ul>
+    <li class="on"></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+</div>
+
+<!-- 页面开始 -->
+<div class="num_box"><div class="line"></div>
+	<!-- 第一个页面 -->
+  <div class="num" id="num_0" style="height: 611px;">
+	  <div class="earth"></div>
+	  <!--<div class="airplane"></div>-->
+      <!--<div class="rainbow"></div>
+      <div class="raintext"><a href="activity/beta_details.html" target="_blank" >了解详情<i></i></a></div>-->
+    <!--<div class="grass"></div><div class="grass grass1"></div>-->
+    	<div class="main_100"><div class="div_full" style="display:none;"></div>
+            <div class="main">
+            	<!--<img class="video_img" src="img/home_page/video.jpg" alt="锦尚中国微信营销云" />-->
+              <div class="login_wrap">
+                    <!--<div class="-sun" style=" background:rgba(255, 250, 188, 0.95); width:60px; height:60px; position:absolute; left:60px; top:-10px; display:inline-block; border-radius:50%; -webkit-border-radius:50%; -moz-border-radius:50%;"></div>-->
+                    <div class="cloud"></div>
+					<div class="cloud1"></div>
+					<div class="cloud2"></div>
+					<div class="cloud3"></div>
+					<div class="cloud4 cloud_pos"></div>
+					<div class="cloud5 cloud_pos1"></div>
+					<!---->
+                </div>
+            
+                <div class="title_h1">
+                    <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+                    <h1 title="锦尚中国微信营销云，让世界为您点赞">锦尚中国云<span>，</span>让世界为您点赞!</h1>
+                    <p class="pt35" style="top: 50%;">全新六网融合,多线精品接入,让功能云化</p>
+                    <p style="top: 50%;">微店系统-智能商城，内置九级分销,微电商萌萌哒</p>
+					 <p style="top: 50%;">O2O超级店,线上线下核销，秒杀有赞商城</p>
+					  <p style="top: 50%;">更多高级功能平滑接入,微信功能云duang起来！</p>
+                </div>
+
+                <div class="test_wrap">
+                	<a class="btn_test" href="http://wpa.qq.com/msgrd?v=3&uin={$copyright['qq']}&site=qq&menu=yes" target="_blank">了解详情</a>
+                </div>
+            </div>
+        </div>
+  </div>
+  <div class="num" id="num_1" style="height: 611px;">
+    <div class="main">
+        <div class="title_h1">
+            <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <h1 class="ml100">大数据O2O旺铺<span>，O2O终结者</span></h1>
+            <p class="pt15 ml100">微信扫码开店，智能抓取粉丝信息；内置九级店中店分销功能，微电商首先</p>
+            <p class="ml100">三网融合，PC网站自动搜索周边个人微信号，自动登录PC店铺；智能获取周边店铺信息，自动生成产品/店铺二维码！</p>
+        </div>
+<!-- 第二幅图 -->
+        
+        	<div class="bg data_wrap">
+            	<div class="data_bg"></div>
+            	<div class="data_person1"></div><div class="eyes_person1"></div>
+				<div class="hardl"></div>
+                <div class="hardr"></div>
+            	<div class="data_person2"></div><div class="eyes_person2"></div>
+                <div class="data_circle_lbg">
+                	<img class="back2_circle_l" src="./resource/newwz/images/back2_circle.png" alt="大数据O2O旺铺" title="大数据O2O旺铺">
+                </div>
+                <div class="data_circle_rbg">
+                	<img class="back2_circle_r" src="./resource/newwz/images/back2_circle.png" alt="大数据O2O旺铺" title="大数据O2O旺铺">
+                </div>
+            </div>
+        </div>
+    <!--<div class="bg"></div>-->
+  
+  
+    <!--<div class="main">
+        <h2>
+            <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <img class="pl100" src="img/home_page/text_page1.png" />
+        </h2>
+        <div class="bg">
+        	<div class="harddisk_wrap">
+            	<div class="harddisk_bg"></div>
+            	<div class="harddisk1">
+                    <div class="circle_bg1"></div>
+                    <div class="circle_bg2"></div>
+                    <img class="person1" src="img/home_page/harddisk.png" alt="" />
+                </div>
+            	<div class="harddisk2">
+                    <div class="circle_bg3"></div>
+                    <div class="circle_bg4"></div>
+                    <img class="person2" src="img/home_page/harddisk1.png" alt="" />
+                </div>
+            	<div class="harddisk3">
+                    <div class="circle_bg5"></div>
+                    <div class="circle_bg6"></div>
+                    <img class="person3" src="img/home_page/harddisk2.png" alt="" />
+                </div>
+            	<div class="harddisk4">
+                    <div class="circle_bg7"></div>
+                    <div class="circle_bg8"></div>
+                    <img class="person4" src="img/home_page/harddisk3.png" alt="" />
+                </div>
+            </div>
+        </div>
+	  </div>-->
+  </div>
+  <div class="num" id="num_2" style="height: 611px;">
+  	<div class="main">
+        <div class="title_h1">
+            <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <h1 class="ml100">智慧微生活<span>，</span>让社会生活互联网+</h1>
+            <p class="pt15 ml100">小区微生活，超市系统，智能WIFI，周边摇一摇，附近商铺完美结合</p>
+            <p class="ml100">政府智慧互联网+，完美解决方案，抢领E时代生活领域</p>
+        </div>
+    	<!--<h2>
+        	<div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <img class="pl100" src="img/home_page/text_page3.png" alt=""  />
+        </h2>-->
+<!-- 全网BGP -->
+		
+        	<div class="bg close_wrap">
+                <div class="bgp_person"></div>
+                <div class="pass_dot pass_dot0"></div>
+                <div class="pass_dot pass_dot1"></div>
+                <div class="pass_dot pass_dot2"></div>
+                <div class="pass_dot pass_dot3"></div>
+                <div class="pass_dot pass_dot4"></div>
+                <!--<div class="pass_dot pass_dot5"></div>
+                <div class="pass_dot pass_dot6"></div>
+                <div class="pass_dot pass_dot7"></div>-->
+            	<div class="close_bg"></div>
+            </div>
+        <!--<div class="bg"></div>-->
+    </div>
+  </div>
+  <div class="num" id="num_3" style="height: 611px;">
+    <div class="main">
+        <div class="title_h1">
+            <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <h1 class="ml100">微信各种功能心有灵犀<span>，</span>私密无碍</h1>
+            <p class="pt15 ml100">领先的混合微信平台模式，无缝融合微信/手机/电脑/QQ</p>
+            <p class="ml100">想您所想，了解并帮助您实现对于微信营销的个性化需求</p>
+        </div>
+    	<!--<h2>
+        	<div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <img class="pl100" src="img/home_page/text_page4.png" alt=""  />
+        </h2>-->
+<!-- SDN网络 -->
+        
+        <div class="bg">
+        	<div class="safe_bg"></div>
+            <!--<div class="safe_wrap"></div>-->
+        </div>
+    </div>
+  </div>
+  <div class="num" id="num_4" style="height: 611px;">
+    <div class="main">
+        <div class="title_h1">
+            <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <h1 class="ml100">快速部署微信公众号<span>，</span>行业功能一应俱全</h1>
+            <p class="pt15 ml100">秒级开通微信功能云服务，自动化脚本，一键部署，节省应用上线时间90%</p>
+            <p class="ml100">可视化操作，众多第三方应用，更有营销数据监测桌面，一应俱全</p>
+        </div>
+    	<!--<h2>
+        	<div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <img class="pl100" src="img/home_page/text_page5.png" alt=""  />
+        </h2>-->
+<!-- 安装各种工具数据库 -->
+        <div class="bg"><!--environment_wrap-->
+          <div class="environment_bg"></div>
+          <div class="pos_php pos_environment"></div>
+          <div class="pos_nginx pos_environment pos_environment1"></div>
+          <div class="pos_mysql pos_environment pos_environment2"></div>
+          <div class="pos_java pos_environment pos_environment4"></div>
+          <!--<div class="pos_centos pos_environment pos_environment3"></div>-->
+          <!--<div class="pos_debian"></div>
+          <div class="icon_process"></div>
+          <div class="icon_configuration"></div>
+          <div class="icon_server1"></div>
+          <div class="icon_Internet"></div>-->
+        </div>
+
+  	</div>
+  </div>
+  <div class="num" id="num_5" style="height: 611px;">
+    <div class="main">
+        <div class="title_h1">
+            <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <h1 class="ml100">市场营销<span>，</span>立竿见影</h1>
+            <p class="pt15 ml100">大量营销活动，加粉神器，粉丝duang起来</p>
+            <p class="ml100">粘性大，客户入口广，转化率高</p>
+        </div>
+    	<!--<h2>
+        	<div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+            <img class="pl100" src="img/home_page/text_page6.png" alt=""  />
+        </h2>-->
+<!-- 灵活计费 -->
+        <div class="bg"><!--idle_wrap-->
+            <div class="idle_bg"><!--<div class="back6_pao"></div><div class="back6_pao back6_pao1"></div>--></div>
+        </div>
+	  </div>
+  </div>
+  <div class="num" id="num_6" style="height: 811px;">
+	  <div class="earth"></div>
+	  <div class="airplane"></div>
+    <!--<div class="grass"></div><div class="grass grass1"></div>-->
+    <div class="main_100">
+            <div class="main">
+                <div class="login_wrap">
+                    <!--<div class="-sun" style=" background:rgba(255, 250, 188, 0.95); width:60px; height:60px; position:absolute; left:60px; top:-10px; display:inline-block; border-radius:50%; -webkit-border-radius:50%; -moz-border-radius:50%;"></div>-->
+                    <div class="cloud"></div><!--<div class="cloud1"></div>--><div class="cloud2"></div><div class="cloud3"></div><div class="cloud cloud_pos"></div><div class="cloud2 cloud_pos1"></div>
+                </div>
+  
+      <div class="title_h1">
+          <div class="circle"><div class="c1"></div><div class="c2"></div><div class="c3"></div></div>
+          <h1 class="pl30">其他功能呢？<span>，</span>锦尚中国内置200多种功能！</h1>
+		  <img class="back2_circle_l" src="./resource/newwz/images/gongneng_img.png" alt="锦尚中国微信营销内置200多种功能" title="锦尚中国微信营销内置200多种功能"> 
+      </div>
+      <div class="bot_icon_wrap">
+      	<a class="icon_weixin"><i></i><span></span></a>
+      	<a class="icon_weibo"><i></i><span></span></a>
+      </div>
+      
+    </div>
+          <div class="subfooter">{$_W['setting']['copyright']['footerright']}| {$_W['setting']['copyright']['footerleft']}{if !empty($_W['setting']['copyright']['statcode'])}{$_W['setting']['copyright']['statcode']}{/if}</div>
+
+  </div>
+  
+</div>
+<!--  <div class="num" id="num_6">
+    <div class="main_100">
+    	<div class="login_wrap">
+        	<div class="sun"></div>
+        	<div class="cloud"></div><div class="cloud1"></div><div class="cloud2"></div><div class="cloud3"></div><div class="cloud cloud_pos"></div><div class="cloud2 cloud_pos1"></div>
+        </div>
+        <div class="grass"></div><div class="grass grass1"></div>
+    	<h2>
+        	<img class="pl100" src="img/home_page/text_simple.png" alt=""  />
+        </h2>
+        <form class="login_form">
+            <div class="form_wrap">
+                <div class="login_inner">
+                    <div class="btn_wrap"><button type="submit">即刻申请免费测试</button></div>
+                </div>
+            </div>
+        </form>
+  	</div>
+  </div>-->
+</div>
+<input type="hidden" value="0" class="ddw">
+<input type="hidden" value="0" class="ddw2">
+<script type="text/javascript" src="./resource/newwz/js/scroll.js"></script> 
+<script type="text/javascript" src="./resource/newwz/js/jquery.mousewheel.js"></script>
+
+<!-- 首页视频开始 -->
+<div class="modal" style="display: none;">
+    <a class="exit_btn" id="bnt_modal"></a>
+    <div class="modal_wrap">
+        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="/js/videojs/FP_AX_CAB_INSTALLER64.exe" width="900" height="500">
+          <param name="movie" value="/video/flvplayer.swf">
+          <param name="quality" value="high">
+          <param name="allowFullScreen" value="true">
+          <param name="FlashVars" value="vcastr_file=/video/ACCloud.flv">
+          <embed src="/video/flvplayer.swf" allowfullscreen="true" flashvars="vcastr_file=/video/ACCloud.flv" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="900" height="500">
+        </object>
+    </div>
+</div>
+<!-- 首页视频结束 -->
+<!-- 视频播放 -->
+<script>
+
+$(document).ready(function(){
+	$('.page0_play').click(function(){
+		$('.modal').css('display','block');
+	});
+	
+	$('#bnt_modal').click(function(){
+		$('.modal').css('display','none');
+	});
+});
+$(document).ready(function(){	
+	$('#btn_adfree').click(function(){
+		$('.adfree_wrap').css('display','none');
+	});
+});
+
+
+
+</script>
+<div id="onService_panel">
+  	<div class="online_advice">
+      	<ul class="online_box">
+          	<a href="http://wpa.qq.com/msgrd?v=3&uin={$copyright['qq']}&site=qq&menu=yes" target="_blank"><li class="i_advice" id="icon_h"></li></a>
+          	<a href="http://wpa.qq.com/msgrd?v=3&uin={$copyright['qq']}&site=qq&menu=yes" target="_blank"><li class="i_feedback"></li></a>
+          	<a href="http://wpa.qq.com/msgrd?v=3&uin={$copyright['qq']}&site=qq&menu=yes"><li class="i_gotop undis" id="goTop" style="display: none;"></li></a>
+        </ul>
+        <div id="i_advice" class="advice_container">
+        	<ul>
+        		<li><a href="http://wpa.qq.com/msgrd?v=3&uin={$copyright['qq']}&site=qq&menu=yes" target="_blank" class="link"><i class="i_qq"></i><span>在线咨询</span></a></li>
+        		<li><a><i class="i_tel"></i><span>{$copyright['phone']}</span></a></li>
+        	</ul>
+        </div>
+    </div>
+</div>
+
+</body></html>

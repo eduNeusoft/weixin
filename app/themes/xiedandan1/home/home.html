@@ -1,0 +1,51 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="../app/themes/xiedandan1/style/index.css">
+<style>
+body{background-color:{if empty($_W['styles']['indexbgcolor'])}#fbf5df{else}{$_W['styles']['indexbgcolor']}{/if};
+color:{if empty($_W['styles']['fontcolor'])}#fff{else}{$_W['styles']['fontcolor']}{/if};
+}
+a{color:{$_W['styles']['linkcolor']}; text-decoration:none;}
+.index small{color:{$_W['styles']['fontnavcolor']};}
+.footer a{color:{$_W['styles']['linkcolor']};}
+.footer,.mod-logo{color:{if empty($_W['styles']['fontcolor'])}#fff{else}{$_W['styles']['fontcolor']}{/if}}
+{$_W['styles']['css']}
+
+</style>
+    <div class="html" style="background-image: url({$_W['styles']['indexbgimg']});">
+      <div class="stage" id="stage">
+        <section id="sec-index">
+
+          <div class="body">
+
+
+    <div class="mod-logo">{$_W['account']['name']}</div>
+    <div class="index" id="index">
+      <a>
+      <img  src="{$_W[attachurl]}/headimg_{$_W['weid']}.jpg?acid={$_W['account']['weid']}"  class="img-polaroid"/>
+      </a>
+
+ {loop $navs $nav}
+          <a href="{$nav['url']}">
+              <p>
+
+                {if !empty($nav['icon'])}
+                  <i><img alt="{$nav['name']}" src="{$_W['attachurl']}{$nav['icon']}"></i>
+                {else}
+                 <i class="{$nav['css']['icon']['icon']}" style="{$nav['css']['icon']['style']}"></i>
+                  {/if}
+
+
+                <small>{$nav['name']}</small>
+              </p>
+</a>
+  {/loop}
+
+ </div>
+
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+{template 'common/footer'}

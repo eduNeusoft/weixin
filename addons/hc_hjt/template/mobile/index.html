@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="shortcut icon" href="icon.png" />
+<link rel="icon" href="icon.png" />
+<title>{if $hc_hjt_title}{$hc_hjt_title}{else}你还没填写【游戏标题】哦{/if}</title>
+<meta name="keywords" content="火贱兔奔月,火贱兔奔月html5游戏" />
+<meta name="description" content="火贱兔奔月html5游戏,火贱兔奔月手机在线游戏" />
+<meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,target-densitydpi=device-dpi"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="full-screen" content="true"/>
+<meta name="screen-orientation" content="portrait"/>
+<meta name="x5-fullscreen" content="true"/>
+<meta name="360-fullscreen" content="true"/>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<!---->{php echo register_jssdk(false);} 
+<style>
+body {
+text-align: center;
+background: #000000;
+padding: 0;
+border: 0;
+margin: 0;
+height: 100%;
+}
+body a{
+display: none;
+}
+html {
+-ms-touch-action: none; /* Direct all pointer events to JavaScript code. */
+font-size: 200%
+}
+#weChat_tips{
+display: none;
+width: 100%;
+height: 100%;
+position: fixed;
+top: 0;
+left: 0;
+z-index: 99;
+background: rgba(0,0,0,0.8);
+/*height: 2.4375rem;*/
+/*line-height: 2.4375rem;*/
+/*text-align: center;*/
+/*position: absolute;*/
+/*top: 0;*/
+/*right: 0;*/
+/*z-index: 99;*/
+/*color: #fff;*/
+/*background: #ff6600;*/
+}
+#weChat_tips .txt{
+color: #fff;
+font-size: 0.875rem;
+font-family: "Microsoft YaHei", simsun;
+width: 100%;
+text-align: left;
+text-indent: 0.2rem;
+height: 2.4375rem;
+line-height: 2.4375rem;
+}
+#weChat_tips .close{
+display: block;
+position: absolute;
+top: 0;
+right: 0;
+width: 100%;
+/*line-height: 2.4375rem;*/
+/*height: 2.4375rem;*/
+/*width: 1.8125rem;*/
+z-index: 100;
+}
+@media (max-width: 719px) {
+html{
+font-size: 28px;
+}
+}
+@media (max-width: 639px) {
+html{
+font-size: 24px;
+}
+}
+@media (max-width: 532px) {
+html{
+font-size: 20px;
+}
+}
+@media (max-width: 479px) {
+html{
+font-size: 16px;
+}
+}
+@media (max-width: 319px) {
+html{
+font-size: 12px;
+}
+}
+</style>
+<script src="{RES}mobile/js/gameshare.js"></script>
+</head>
+<body>
+<div style="display:inline-block;width:100%; height:100%;margin: 0 auto; background: #fff; position:relative;" id="gameDiv">
+<canvas id="gameCanvas" width="720" height="1280" style="background-color: #0d0c0d"></canvas>
+</div>
+<div id="weChat_tips">
+<img src="{RES}mobile/js/weChatTip.png" class="close" />
+</div>
+<div id="logo" style="display:none;position: absolute;z-index: 100; top: 0; left:0; width: 100%; height: 300px; background: #fff; color: #000">
+</div>
+<script>var document_class = "GameApp";</script>
+<script src="{RES}mobile/js/egret_loader.js"></script>
+<script src="{RES}mobile/js/game-min.js?v=16"></script>
+<script src="{RES}mobile/js/zepto.min.js"></script>
+<script>
+egret_h5.startGame();
+window.shareData = {
+"call":false,
+"imgUrl": "{$_W['attachurl']}{$photo}",
+"url": "http://www.baidu.com",
+"title": "{if $hc_hjt_title}{$hc_hjt_title}{else}火贱兔奔月！--嫦娥不是你想见，想见就能见，玩了才知道！{/if}",
+"cont": "{if $share_desc}{$share_desc}{else}一只火贱兔流落人间，中秋月圆夜，一心飞奔回嫦娥姐姐身边的故事。{/if}",
+"doneJump" : '{if $hc_hjt_url}{$hc_hjt_url}{else}{$homeurl}{/if}',
+"fun":""
+};
+shareData.url  = "{$homeurl}";
+(function($){
+window.timer4weChat = null;
+$("#weChat_tips .close").on("tap",function(e){
+clearTimeout(window.timer4weChat);
+$("#weChat_tips").hide(200);
+});
+window.shareGame = function(){
+_hmt.push(["_trackEvent", "button", "通知好友被点击"]);
+$("#weChat_tips").show(200);
+window.timer4weCaht=setTimeout(function(){
+clearTimeout(window.timer4weChat);
+$("#weChat_tips").hide(200);
+},5000);
+};
+window.onerror = function(){
+$("#logo").append(JSON.stringify(arguments));
+}
+window.log = function(str){
+//$("#logo").append(str+"\n");
+}
+window.replayGame = function(){
+_hmt.push(["_trackEvent", "button", "重玩按钮被点击"]);
+$("#weChat_tips").hide(200);
+}
+window.openWebsite = function(){
+window.location.href = "{if $adurl}{$adurl}{else}{$homeurl}{/if}"
+}
+LBGAME.Share.setShareUrl(function(a){
+shareData.url = a;
+});
+LBGAME.Share.updateData(shareData);
+})(Zepto);
+</script>
+<script src="{RES}mobile/js/stat.js"></script>
+</body>
+</html>

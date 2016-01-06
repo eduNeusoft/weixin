@@ -1,0 +1,31 @@
+{template 'common/header'}
+<style type="text/css">
+    .col-xs-2,.col-xs-6,.col-xs-3,.col-xs-9{padding: 0px 3px}
+</style>
+<div class="main">
+    <div class="panel panel-success">
+        <div class="panel-heading">我的奖品</div>
+        <ul class="list-group" style="margin: 10px auto">
+            {loop $records $item}
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-xs-9">
+                        {if ($item['winning_time']+(24*3600)) < TIMESTAMP}
+                        <span class="label label-default" style="padding:.1em .2em .1em;font-weight:normal">过期</span>
+                        {elseif $item['status'] == 1}
+                        <span class="label label-info" style="padding:.1em .2em .1em;font-weight:normal">未领</span>
+                        {elseif $item['status'] == -2}
+                        <span class="label label-danger" style="padding:.1em .2em .1em;font-weight:normal">放弃</span>
+                        {else}
+                        <span class="label label-success" style="padding:.1em .2em .1em;font-weight:normal">已领</span>
+                        {/if}
+                        <a href="{php echo $this->createMobileUrl('Prize',array('record_id'=>$item['id']))}"> {$item['prize_name']}</a>
+                    </div>
+                    <div class="col-xs-3" style="text-align: right">{php echo date('Y-m-d',$item['winning_time'])}</div>
+                </div>
+            </li>
+            {/loop}
+        </ul>
+    </div>
+</div>
+{template 'common/footer'}

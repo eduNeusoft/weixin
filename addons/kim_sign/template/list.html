@@ -1,0 +1,62 @@
+{template 'common/header'}
+<style type="text/css">
+.pagination{margin: 5px auto}
+</style>
+<div class="main">
+    <div class="panel panel-info">
+        <div class="panel-heading">今日签到记录 | 总数: {$total}</div>
+        <div class="panel-body">
+            <form action="" method="post" id="form1" class="ng-pristine ng-valid">
+            <table class="table ">
+                <thead>
+                    <tr>
+                        <th style="width:5%;text-align: center;" class="row-first"><input type="checkbox" class="checkAll" onclick="var ck = this.checked;$(':checkbox').each(function(){this.checked = ck});"/></td>
+                        <th style="width:5%;text-align: center" class="row-hover">编号</th>
+                        <th style="text-align: center">帐号</th>
+                        <th style="text-align: center">签到时间</th>
+                        <th style="width:20%;text-align: center">奖品</th>
+                        <th style="width:10%;text-align: center">签到总次</th>
+                        <th style="width:10%;text-align: center">今日排名</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loop $list $row}
+                    <tr>
+                        <td style="text-align:center;" class="row-first"><input type="checkbox" class="select_item" name="select[]" value="{$row['id']}" /></td>
+                        <td style="text-align:center;" class="row-hover">{$row['id']}</td>
+                        {php $u=getUserFieldsByUid($row['uid'],array('nickname','email'));}
+                        <td>{if empty($u['nickname'])}{$u['email']}{else}{$u['nickname']}{/if}</td>
+                        <td style="text-align:center;" >{php echo date('Y-m-d H:i:s', $row['time']);}</td>
+                        {php $p=getUserTodayPrize($row['uid']);}
+                        <td style="text-align:left;">
+                        {if !empty($p['prize_name'])}
+                            奖品:&nbsp;<a href="{php echo $this->createWebUrl('prizes',array('op'=>'record','id'=>$p['id']))}">{$p['prize_name']}</a><br/>
+                            状态:{if $item['status'] == -1}
+                            <span class="label label-danger">已发放</span>
+                            {else}
+                            <span class="label label-success">未发放</span>
+                            {/if}
+                        {else}
+                            <span class="label label-danger">未中奖</span>
+                        {/if}
+                        </td>
+                        <td style="text-align:center;" >{$row['sum_times']}</td>
+                        <td style="text-align:center;" >{$row['rank']}</td>
+                    </tr>
+                    {/loop}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <input type="submit" name="delete" value="删除" class="btn btn-primary" />
+                            <input type="hidden" name="token" value="{$_W['token']}" />
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            </form>
+            {$pager}
+        </div>
+    </div>
+</div>
+{template 'common/footer'}

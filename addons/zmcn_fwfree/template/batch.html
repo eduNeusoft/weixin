@@ -1,0 +1,365 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $foo == 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('zmfwpee', array('foo' => 'post'))}">新增批次</a></li>
+	<li {if $foo == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('zmfwpee', array('foo' => 'display'))}">批次管理</a></li>
+	<li {if $foo == 'daoru'}class="active"{/if}><a href="{php echo $this->createWebUrl('zmfwpee', array('foo' => 'daoru'))}">生成密码</a></li>
+</ul>
+{if $foo == 'daoru'}
+<div class="main">
+	<div class="panel panel-info form-group">
+		<div class="panel-heading form-group clearfix">生成防伪码</div>
+		<div class="panel-body">
+			<div class="form-group clearfix">
+				<form action="./index.php" method="post" class="form-horizontal" role="form">
+				<input type="hidden" name="c" value="site" />
+				<input type="hidden" name="a" value="entry" />
+				<input type="hidden" value="zmcn_fwfree" name="m">
+				<input type="hidden" value="zmfwpee" name="do">
+				<input type="hidden" value="daoru" name="foo">
+				<input type="hidden" value="{$batch['id']}" name="id">
+				<input type="hidden" name="token" value="{$_W['token']}" />
+				<label class="form-group control-label col-md-2">生成演示防伪码(图片)</label>
+				<div class="col-md-4">
+				<select id="common_corp" class="form-control input-medium"  name="codetype">
+					<optgroup label="生成网页格式显示,供测试用" />
+					<option value="3" {if $_GPC['codetype']=='3'}selected{/if}>生成可读防伪码(分节)</option>
+					<option value="4" {if $_GPC['codetype']=='4'}selected{/if}>生成二维防伪码</option>
+					<option value="6" {if $_GPC['codetype']=='6'}selected{/if}>生成原始防伪码</option>
+				</select>
+				</div>
+				<div class="col-sm-4 col-xs-12">
+					<div class="input-group form-group">
+						<span class="input-group-addon">生成</span>
+						<input type="text" name="codeno"  class="form-control" value="10"  readonly />
+						<span class="input-group-addon">个密码</span>
+					</div>
+					<div class="help-block">演示防伪每次10个，为了真假对比每批中有一到两个是假码</div>					
+				</div>				
+				<div class="col-md-2">
+					<input type="submit" name="submit" value="提交" class="btn btn-primary"/>
+				</div>
+				</form>
+			</div>			
+			<div class="form-group clearfix">
+				<form action="./index.php" method="post" class="form-horizontal" role="form">
+				<label class="form-group control-label col-md-2">防伪标购买</label>
+				<div class="col-sm-10 col-xs-12">
+					<div class="help-block">本页面生成的防伪码只供演示，只生成批号为"8888888"防伪码，如果你没有该批号，请自行添加后再来生成演示码。如要购买微信防伪标，请与营运商联系！</div>					
+				</div>	
+
+			<hr/>			
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">重要提示</label>
+				<div class="col-md-9"><div class="help-block">印刷前一定要生成几个演示的二维测试一下，确认正常后，再下单印刷！</div>
+				</div>
+			</div>				
+				</form>
+			</div>
+		</div>
+	</div>
+		<div class="panel panel-info">
+		<div class="panel-heading">生成防伪码结果</div>
+		<div class="panel-body">
+          <div class="col-md-12" id='pposs'>
+		  {if $mima != ""}
+            <textarea class="form-control" name="" placeholder="" rows="25">{$mima}</textarea>
+            <div class="help-block">如需保存，请复制出来，（系统不会记录你的防伪码）</div>
+			{elseif $html != ""}
+			{$html}
+			<div class="help-block">如需保存，请截图或图片另保为，（系统不会记录你的防伪码）</div>
+			{/if}
+          </div>
+		</div></div>
+</div>
+{elseif $foo == 'display'}
+<style>
+.label{cursor:pointer;}
+</style>
+<div class="main">
+  <div class="panel panel-info">	
+	<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form action="./index.php" method="get" class="form-horizontal" role="form">
+            <input type="hidden" name="c" value="site" />
+            <input type="hidden" name="a" value="entry" />
+			<input type="hidden" value="zmcn_fw" name="m">
+			<input type="hidden" value="zmfwpee" name="do">
+			<input type="hidden" value="display" name="foo">
+			<input type="hidden" name="token" value="{$_W['token']}" />
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">商品名称</label>
+				<div class="col-sm-8">
+						<input type="text" placeholder="关键字" value="{$_GPC['keyword']}" id="" name="keyword" class="form-control">
+				</div>				
+			</div>
+			<div class="form-group">
+				<div class="pull-right col-xs-12 col-sm-2 col-lg-1">
+					<button class="btn btn-block"><span class="icon icon-search"></span> 搜索</button>				
+				</div>
+			</div>
+			</form>	
+		</div>
+	</div>
+  </div>
+  <div class="panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="text-align:center; width:50px;">ID</th>
+					<th style="text-align:center; width:100px;">前缀 批号</th>
+					<th style="text-align:center; width:75px;">查询量<br>发行量</th>
+					<th style="text-align:center; width:200px;">品牌<br>商品名称</th>
+					<th style="text-align:center; width:200px;">企业名称</th>
+					{if $settings['ischuanhuo'] > 0}
+					<th style="text-align:center; width:100px;">销售区域</th>
+					{/if}
+					<th style="text-align:center; width:100px;">积分活动</th>
+					<th style="text-align:center; width:100px;">生成时间</th>
+					<th style="text-align:center; width:100px;">最后操作</th>
+					<th style="text-align:center; width:160px;">属性</th>
+					<th style="text-align:center; min-width:100px;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+				<tr  style="text-align:center;">				
+				   <td style="text-align:center;">{$row['id']}</td>
+				   <td style="text-align:center;">{$row['m1']} {$row['batch']}</td>
+				   <td style="text-align:center;">{$row['rcon']}<br>{$row['num']} </td>
+					<td style="text-align:center;">{$row['brand']}<br>{$row['product']}</td>
+					<td style="text-align:center;">{$row['factory']}</td>
+					{if $settings['ischuanhuo'] > 0}
+					<td style="text-align:center;">
+					{if $row['ischuanhuo']==0}不限{elseif $settings['ischuanhuo'] ==2}{$row['province']}{elseif $settings['ischuanhuo'] ==3}{$row['province']}<br>{$row['city']}{/if}
+					</td>
+					{/if}
+					<td style="text-align:center;">
+					{if $row['inttype'] == 0}<span class="label label-success">抽奖</span>{elseif $row['inttype'] == 2}<span class="label label-info">余额</span>{else}<span class="label label-primary">积分</span>{/if}
+					{$row['integral']}</td>
+					<td style="text-align:center;">{php echo date('Y-m-d', $row['addtime'])}<br>{php echo date('H:i:s', $row['addtime'])}</td>
+					<td style="text-align:center;">{php echo date('Y-m-d', $row['lasttime'])}<br>{php echo date('H:i:s', $row['lasttime'])}</td>	
+					<td>
+					{if $row['validity'] > $_W['timestamp']}<span class="label label-success">有效</span>{else}<span class="label label-info">过期</span>{/if}
+					{if $row['batch'] == '8888888'}<span class="label label-info">演示</span>{elseif $row['m1'] == 'FW'}<span class="label label-success">定制</span>{elseif $row['m1'] == 'FT'}<span class="label label-primary">购买</span>{/if}
+					</td>		
+					<td style="text-align:center;">
+					<a rel="tooltip" href="{php echo $this->createWebUrl('zmfwcaa', array('cid' => $row['id'], 'foo' => 'post'))}" title="操作记录" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="操作记录"><i class="fa fa-calendar"></i></a> <a rel="tooltip" href="{php echo $this->createWebUrl('zmfwpee', array('id' => $row['id'], 'foo' => 'post'))}" title="编辑" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="编辑"><i class="fa fa-pencil"></i></a>
+					</td>
+				</tr>
+				{/loop}	
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+  </div>
+</div>
+{elseif $foo == 'post'}
+
+
+
+
+<form action="./index.php" method="post" class="form-horizontal" role="form" NAME="userinfo">
+<div class="main">
+	<div class="panel panel-info">
+		<div class="panel-heading">新增防伪码批次</div>
+		<div class="panel-body">
+			<input type="hidden" name="c" value="{$_GPC['c']}">
+			<input type="hidden" name="a" value="{$_GPC['a']}">
+			<input type="hidden" name="do" value="{$_GPC['do']}">
+			<input type="hidden" name="m" value="{$_GPC['m']}" />
+			<input type="hidden" name="foo" value="{$_GPC['foo']}" />
+			<input type="hidden" name="id" value="{$batch['id']}" />
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">防伪码批号</label>
+				{if $batch['id'] == "0"}
+				<div class="col-md-1">
+				<select class="form-control" name="m1" >
+						<option value="{$codeset['m'][1]}">定制</option>
+						<!---option value="FT">购买</option----------->
+				</select>
+				</div>				
+				<div class="col-md-3">
+					<input type="text" class="form-control" name="batch" id="batch" placeholder="请填写{$codeset['m'][2]}位有效数字，批号不能有重复" value="{$batch['batch']}" onkeyup="value=value.replace(/[^1234567890]+/g,'')" maxlength="{$codeset['m'][2]}" >
+					<div class="help-block" id="gradeInfo"></div>
+				</div>	
+				{else}
+				<label class="control-label col-md-1">{$batch['m1']} {$batch['batch']}</label>
+				<div class="col-md-3">
+					<div class="help-block">发行量 {$batch['num']} 枚防伪标<br>(实际流通量还得扣除生产过程的损耗)</div>
+				</div>				
+				{/if}
+				<label class="control-label col-md-2">备注</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="remark" placeholder="内部标识用，不会显示" value="{$batch['remark']}">
+				</div>
+			</div>	
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">商品名称</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="product" placeholder="如果是多商品共用的标，可不填，则不会显示" value="{$batch['product']}" id="xdxdxd">
+				</div>
+				{if $settings['isint'] != "0"}
+				<div class="col-sm-4">
+				<select class="form-control" name="shopproid" onchange ="document.userinfo.product.value=this.options[this.selectedIndex].text;">
+				<option value="">=======快速选择商品=======</option>
+					{loop $parent_cate $parent}
+						<optgroup label="{$parent['b']}" />
+						{loop $sub_cate $sub}
+							{if $sub['c'] == $parent['a']}
+								<option value="{$sub['a']}" name="{$sub['b']}"  {if $toshop['proid']==$sub['a']}selected{/if}>{$sub['b']}</option>
+							{/if}
+						{/loop}
+					{/loop}
+				</select>
+				</div>
+				{/if}
+			</div>	
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">企业名称</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="factory" placeholder="不填，则不会显示" value="{$batch['factory']}">
+				</div>
+				<label class="control-label col-md-2">商品品牌</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="brand" placeholder="如果是多品牌共用的标，可不填，则不会显示" value="{$batch['brand']}">
+				</div>
+			</div>
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">广告视频</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="video" placeholder="企业形象广告，不填，则不会显示" value="{$batch['video']}">
+					<div class="help-block">格式如: http://www.xxx.com/name.mp4</div>
+				</div>
+				<label class="control-label col-md-2">查询后引导链接</label>
+				<div class="col-md-4">
+					<input type="text" class="form-control" name="buylink" placeholder="可以是商城,其它抽奖模块,砸蛋,调研等等......" value="{$batch['buylink']}">
+					<div class="help-block">你想让客户查询后去什么地方只要在这里填写链接就行,可以让你无限发挥</div>
+				</div>
+			</div>	
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">有效日期</label>
+				<div class="col-md-4">
+					{php echo tpl_form_field_date('validity', !empty($batch['validity']) ? date('Y-m-d H:i',$batch['validity']) : date('Y-m-d H:i:s',strtotime('+3 year')), 1)}
+					<div class="help-block">设置成过期，则该批密码将失效(可用来控制密码是否生效)</div>
+				</div>
+				<label class="control-label col-md-2">积分设置</label>
+				<div class="col-md-2">
+				<select id="common_corp" class="form-control input-medium"  name="inttype">
+					<option value="1" {if $batch['inttype']==1}selected{/if}>积分</option>
+					<option value="2" {if $batch['inttype']==2}selected{/if}>余额</option>
+					<!----option value="3" {if $batch['inttype']==3}selected{/if}>credit3</option>
+					<option value="4" {if $batch['inttype']==4}selected{/if}>credit4</option>
+					<option value="5" {if $batch['inttype']==5}selected{/if}>credit5</option ---->
+					{if $settings['isluck'] > 0}<option value="0" {if $batch['inttype']==0}selected{/if}>参与抽奖活动</option>{/if}
+				</select>
+				</div>
+				<div class="col-md-2">
+					<input type="text" class="form-control" name="integral" placeholder="设为0，则不送" value="{$batch['integral']}"  onkeyup="value=value.replace(/[^1234567890]+/g,'')" maxlength="5" >
+					<div class="help-block">如果抽奖关闭，则本项将生效，默认为积分值</div>
+				</div>
+			</div>
+			{if $settings['ischuanhuo'] > 0}
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">销售区域</label>
+				<div class="col-md-2">
+				<select id="common_corp" class="form-control input-medium"  name="ischuanhuo">
+					<option value="0" {if $batch['ischuanhuo']==0}selected{/if}>不限</option>
+					<option value="1" {if $batch['ischuanhuo']==1}selected{/if}>限定地区</option>
+				</select>
+				</div>				
+				<div class="col-md-8">
+					{php echo tpl_form_field_district('chuanhuo', array('province' => $batch['province'], 'city' => $batch['city'] ));}
+					<div class="help-block">防串货用，根据系统设置范围精确到[{if $settings['ischuanhuo']==2}省级{elseif $settings['ischuanhuo']==3}市级{/if}]，下级选项无效</div>
+				</div>
+			</div>
+			{else}
+			<input type="hidden" name="chuanhuo[province]" value="{$batch['province']}" /><input type="hidden" name="chuanhuo[city]" value="{$batch['city']}" /><input type="hidden" name="ischuanhuo" value="{$batch['ischuanhuo']}" />
+			{/if}
+
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">商品主图<br>(或是企业LOGO)</label>
+				<div class="col-md-4">
+					{php echo tpl_form_field_image('logo', $batch['logo'], '', array('extras' => array('text' => 'readonly')))}
+					<div class="help-block">通用标可以是企业或品牌LOGO，不填会默认引用系统设置，建议尺寸640*640</div>
+				</div>
+				<label class="control-label col-md-2">Banner图</label>
+				<div class="col-md-4">
+					{php echo tpl_form_field_image('banner', $batch['banner'], '', array('extras' => array('text' => 'readonly')))}
+					<div class="help-block">不填会默认引用系统设置，建议尺寸640*200</div>
+				</div>
+			</div>
+			<div class="form-group clearfix">
+				<label class="control-label col-md-2">自定义属性</label>
+				<div class="col-md-10">
+		<table class="table table-hover" style="width:100%;">
+			<thead class="navbar-inner"  style="width:100%;">
+				<tr>
+					<th class="row-hover span3" style="width:20%;">属性标题<i></i></th>
+					<th class="row-hover span3" style="width:60%;">项目内容<i></i></th>
+					<th style="text-align:right;" style="width:20%;">操作</th>
+				</tr>
+			</thead>
+			<tbody id="status-items">
+				{loop $params $param}
+				<tr>
+					<td><input name="titles[]" type="text" value="{$param['title']}" class="form-control"></td>
+					<td><input name="values[]" type="text" value="{$param['value']}" class="form-control"></td>
+					<td style="text-align:right;">
+						<a onclick="if (confirm('删除操作不可恢复，确认吗？')){ $(this).parent().parent().remove(); return true;} else {return false;}" href="javascript:;" class="btn btn-small" title="删除此条目"><i class="glyphicon glyphicon-remove-circle"></i> 删除</a></td>
+				</tr>
+				{/loop}
+			</tbody>
+			<tr>
+				<td colspan="3">
+					<a href="javascript:;" onclick="addStatusItem()"><i class="icon-plus-sign-alt"></i> 添加新项目</a>
+				</td>
+			</tr>
+		</table>
+				</div>
+			</div>			
+		</div>
+	</div>
+</div>
+			<div class="form-group">
+				<div class="col-sm-8">
+					<button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+					<input type="hidden" name="token" value="{$_W['token']}" />
+				</div>		
+			</div>
+			</form>
+<script type="text/javascript">
+<!--
+	function addStatusItem() {
+		var html = '' +
+				'<tr>' +
+					'<td><input name="titles[]" type="text" class="form-control" placeholder="为美观,尽量为4个汉字长度"/></td>' +
+					'<td><input name="values[]" type="text" value="" class="form-control" placeholder="尽量不要超过16个汉字"></td>' +
+					'<td style="text-align:right;"><a href="javascript:;" onclick="$(this).parent().parent().remove();" class="btn btn-small" title="删除此条目"><i class="glyphicon glyphicon-remove-circle"></i> 删除</a></td>' +
+				'</tr>';
+		$('#status-items').append(html);
+	}
+$(document).ready(function(){
+checkConfirm();
+});
+function checkConfirm(){
+$("#batch").blur(function(){
+var gradename = $(this).val();
+var changeUrl = "{php echo $this->createWebUrl('zmfwpee', array( 'foo' => 'chong'))}&b="+gradename;
+$.get(changeUrl,function(str){
+if(str == '1'){
+$("#gradeInfo").html("<font color=\"red\">您输入的批号已经存在！请重新输入！</font>");
+}else{
+$("#gradeInfo").html("");
+}
+})
+return false;
+})
+}
+//-->
+</script>
+
+{/if}
+
+
+{template 'common/footer'}

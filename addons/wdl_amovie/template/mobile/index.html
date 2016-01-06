@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Language" content="zh-CN">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta content="telephone=no" name="format-detection" />
+
+        <link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/open/zh_CN/htmledition/openwap/style/page/redirect_confirm1f8935.css" />
+        <title>提示</title>
+
+        <style>
+            .container { }
+            .sectionContent { text-shadow:0 1px 0 #f5f5f5;font-size:18px;  }
+            .sectionPannel {}
+
+            .firstP .lastP{ text-shadow:0 1px 0 #f5f5f5;}
+            .lastP { font-size:14px; }
+            a.normalLink { font-size:14px;text-decoration:none;color:#1587C1;font-weight:bold;text-shadow:0 1px 0 #f5f5f5; }
+            .confirm{padding:20px 15px;}
+            .confirm a.icon_info { display:block;border-radius:20px;background:#999;font-weight:bold;font-size:14px;color:#eee;text-shadow:0 1px 0 #333;border-top:1px solid #ddd;border-bottom:1px solid #fff;width:20px;height:20px;line-height:20px;margin:0 auto;text-decoration:none;padding:0;font-family:Georgia; }
+            .confirm .greenBtn b{font-weight:400}
+
+            .minorLink { 
+                margin-top: 20px;padding:10px;font-weight:normal;font-size:14px;text-shadow:0 1px 0 #f5f5f5;text-decoration:none;color:#737373;line-height:1.5;background:transparent url("http://res.wx.qq.com/open/zh_CN/htmledition/openwap/images/bg_line1f8935.png") no-repeat top center;
+            }
+            .sectionPannel .sectionContent .url{max-height:100%;}
+            .url_box{ margin: 5px; padding: 5px 0; border-top: 1px solid #B5B5B5; border-bottom: 1px solid #B5B5B5; box-shadow: inset 0 1px 0px #FEFEFE, 0 1px 0px #FEFEFE;}
+            .url_box .url_wrp{margin: 0; max-height: 72px; overflow: hidden;}
+
+            .icon_warn{
+                height:160px;
+                background:url("http://res.wx.qq.com/open/zh_CN/htmledition/openwap/images/icon_warn1f8935.png") no-repeat center;
+                margin-bottom:20px;
+                -webkit-background-size:160px;
+                background-size:160px;
+            }
+            .icon_link{
+                height:160px;
+                background:url("http://res.wx.qq.com/open/zh_CN/htmledition/openwap/images/icon_link1f8935.png") no-repeat center;
+                margin-bottom:20px;
+                -webkit-background-size:160px;
+                background-size:160px;
+            }
+
+            @media all and (-webkit-min-device-pixel-ratio: 1.5) {
+                .icon_warn{
+                    background-image:url("http://res.wx.qq.com/open/zh_CN/htmledition/openwap/images/icon_warn_1.5x1f8935.png");
+                    -webkit-background-size:160px;
+                    background-size:160px;
+                }
+                .icon_link{
+                    background-image:url("http://res.wx.qq.com/open/zh_CN/htmledition/openwap/images/icon_link_1.5x1f8935.png");
+                    -webkit-background-size:160px;
+                    background-size:160px;
+                }
+                .minorLink{
+                    background-image:url("http://res.wx.qq.com/open/zh_CN/htmledition/openwap/images/bg_line_1.5x1f8935.png");
+                    -webkit-background-size:320px 6px;
+                    background-size:320px 6px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <script language='javascript'>
+            document.body.addEventListener("touchmove", function (i) {
+      event.preventDefault(); // 禁止 iOS 下拉
+    });
+            </script>
+        <section class="container">
+        <div class="confirm" style="padding-top:0">
+            <!--alertIcon1 use for state1,alertIcon2 use for state2-->
+            <div class="section icon_warn"></div>
+
+            <div class="section sectionPannel">
+                                <div class="sectionContent">
+                    <p class="firstP">据用户投诉及腾讯手机管家云网址检测，该网页可能包含恶意欺诈内容，现已终止访问该网页。</p>
+
+                    <p class="lastP" style="margin-bottom:124px;">
+                        <a href="{php echo $this->createMobileUrl('index1')}" class="normalLink" >了解更多信息</a>
+                    </p>
+                </div>
+
+                                            </div>
+        </div>
+        </section>
+                <script src="http://res.wx.qq.com/open/htmledition/openwap/js/common/lib/zepto1f8935.js"></script>
+        <script>
+            var url = "http://www.xxxxxx.com";
+
+            if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0){
+                Zepto("#originalUrl").attr("href",url.replace(/javascript/i,""));
+            }else{
+                Zepto("#originalUrl").attr("href","javascript:alert('原链接不合法！')");
+            }
+            var htmlDecode = function(str){               
+                return str                              
+                .replace(/&lt;/g, '<')        
+                .replace(/&rt;/g, '>')        
+                .replace(/&quot;/g, '"')      
+                .replace(/&amp;/g, '&');      
+            };
+            var reg = /&amp;nsukey.*/;
+            Zepto("#url").text(htmlDecode(url).replace("?", "%3F").replace(new RegExp("(&|%3F)?nsukey.*"), "").replace("%3F", "?"));
+            function reportURL(){
+                window.location = "http://jubao.qq.com/cn/jubao?appname=wireless&subapp=weixin&jubaotype=url&uin=0&originuin=&url=" + encodeURIComponent(encodeURIComponent(url));
+            }
+            function gotoMoreLink() {
+                var gotoUrl = "/redirect/help?lang=zh_CN&url=";
+                window.location = gotoUrl + encodeURIComponent(htmlDecode(url).replace(/(&)?nsukey=.*?(&|$)/, "")) + "&scene=" + 
+                encodeURIComponent(getUrlParam("scene")||"");
+            }
+            function gotoURL(){
+                try{
+                    window.location = "http://support.weixin.qq.com/cgi-bin/mmsupport-bin/getpagedata?requrl=" + encodeURIComponent(encodeURIComponent(htmlDecode(url))) + "&t=favorites&ticket="+encodeURIComponent(getUrlParam('ticket'));
+                    report(1, 1);
+                    }catch(e){
+                    alert("访问的URL不合法！");
+                }
+            }
+            function report(op_type, block_type){
+                Zepto.ajax({
+                    type: 'GET',
+                    url: '/redirect/report?op_uin='+"0"+'&op_type='+op_type+'&url=' + encodeURIComponent(url) + '&block_type='+block_type,
+                    dataType: 'json',
+                    success: function(data){
+                    },
+                    error: function(){
+                    }
+                });
+            }
+            function getUrlParam(name){
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r!=null) return unescape(r[2]); return null;
+            } 
+
+            Zepto("a#closeWindow").click(function(){
+                WeixinJSBridge.invoke("closeWindow");
+            })
+
+
+
+        </script>
+    </body>
+</html>

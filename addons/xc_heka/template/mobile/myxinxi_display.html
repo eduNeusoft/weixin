@@ -1,0 +1,186 @@
+{template 'header'}
+
+<style>
+
+    body {
+
+        background: url("{$_W['siteroot']}addons/xc_heka/resource/images/bg.png") 0 0 no-repeat;
+
+        background-size: cover;
+
+    }
+
+</style>
+
+
+
+
+
+
+
+<div class="boxz">
+
+    <div class="left">
+
+        <img src="{$res[img]}" style="width:100%;" /><br /><strong>{$res[name]}</strong>
+
+    </div>
+
+    <div class="right">
+
+    <p>
+
+        DIY电子贺卡，转给老师您的“小心意”。自选模板，加上美照（萌宠也可以啊~）、自己的名字（或者外号？），还有给老师的心里话
+
+    </p>
+
+    </div>
+
+    <div style="clear: both"></div>
+
+    Tips : 根据小园子的经验，给老师说的话贵在真诚不在多哟~
+
+</div>
+
+<div style="clear: both"></div>
+
+ <form  action="" class="form-horizontal form" method="post">
+
+ 
+
+ <input type="hidden" name="openid" value="{$res['openid']}">
+
+ 
+
+   <div class="panel panel-default">
+
+                <div class="panel-body">
+
+    
+                     <div class="form-group">
+
+                        <label class="col-xs-12 col-sm-12">老师的名字</label>
+
+                        <div class="col-sm-12 col-xs-12">
+
+                            <input  type="text" class="form-control" name="techname" value=""></input>
+
+                        </div>
+
+                    </div>
+                  <div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 col-lg-2 control-label">DIY图片</label>
+
+					<div class="col-sm-8">
+
+						{php echo tpl_form_field_image(images);}
+
+					</div>
+
+				</div>
+
+                    <div class="form-group">
+
+                        <label class="col-xs-12 col-sm-12">送给老师的话</label>
+
+                        <div class="col-sm-12 col-xs-12">
+
+                            <textarea  type="text" class="form-control" id="huayu" name="huayu" ></textarea>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="col-xs-12 col-sm-12">模板选择</label>
+
+                        <div class="col-sm-12 col-xs-12">
+
+                            <style>
+
+                                ul {width:100%;display:block;}
+
+                                li {float:left;width:33.3333333333333%;}
+
+                                li img {width:98%;height:auto;}
+
+                            </style>
+                            
+
+                            <ul>
+
+                               <li>
+
+                                    <img src="{$_W['siteroot']}addons/xc_heka/resource/images/1.png" class="img-responsive">
+<input type="radio" name="sel" value="01" checked="checked" />
+                                </li>
+
+                                 <li>
+
+                                    <img src="{$_W['siteroot']}addons/xc_heka/resource/images/2.png" class="img-responsive">
+<input type="radio" name="sel" value="02"  />
+                                </li>
+
+                                 <li>
+
+                                    <img src="{$_W['siteroot']}addons/xc_heka/resource/images/3.png" class="img-responsive">
+<input type="radio" name="sel" value="03"  />
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                
+
+            <div class="form-group">
+
+                <label class="col-xs-12 col-sm-12"></label>
+
+                <div class="col-sm-12 col-xs-12" style="text-align:center">
+
+                    <button type="submit"  id="send" class="btn btn-primary btn-lg" name="submit" value="预览">预览</button>
+
+                    <button type="submit"   id="send" class="btn btn-warning btn-lg" name="submit" value="完成提交">完成提交</button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+
+
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+     $(document).ready(function(){
+		 
+	  $('#send').click(function(){
+		var techname =  $("input[name='techname']").val();
+		var huayu =  $("#huayu").text();
+		
+		 if(techname==''){
+			 
+			alert('内容不得为空'); 
+		 }
+	  return false;
+		 });
+		 
+	 });
+
+
+</script>
+
+
+
+{template 'footer'}
+

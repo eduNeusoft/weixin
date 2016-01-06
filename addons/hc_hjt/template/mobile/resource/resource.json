@@ -1,0 +1,19 @@
+{
+"resources":
+	[
+		{"name":"sprite","type":"sheet","url":"../addons/hc_hjt/template/mobile/resource/assets/sprite.json"},
+		{"name":"btn","type":"sheet","url":"../addons/hc_hjt/template/mobile/resource/assets/btn.json"},
+        {"name":"result","type":"sheet","url":"../addons/hc_hjt/template/mobile/resource/assets/result.json"},
+        {"name":"scene","type":"sheet","url":"../addons/hc_hjt/template/mobile/resource/assets/scene.json"},
+        {"name":"bg","type":"image","url":"../addons/hc_hjt/template/mobile/resource/assets/bg.jpg"},
+        {"name":"homeBg","type":"image","url":"../addons/hc_hjt/template/mobile/resource/assets/homeBg.jpg"},
+        {"name":"maskOpacity","type":"image","url":"../addons/hc_hjt/template/mobile/resource/assets/maskOpacity.png"},
+        {"name":"bgSound","type":"sound","url":"../addons/hc_hjt/template/mobile/bg.mp3"},
+        {"name":"hitSound","type":"sound","url":"../addons/hc_hjt/template/mobile/hit.wav"}
+	],
+
+"groups":
+	[
+        {"name":"preload","keys":"bg,homeBg,sprite,btn,scene,result,maskOpacity"}
+	]
+}

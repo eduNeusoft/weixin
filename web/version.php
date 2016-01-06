@@ -1,0 +1,1 @@
+<?php return array ('ver' => 'wdl16.9');?>

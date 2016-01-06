@@ -1,0 +1,6 @@
+1、文件必须要调用服务号，并把服务号的OAuth2.0网页授权的回调域名，安全网址都得填回你的平台
+2、修改文件/addons/eudy_ads/template/mobile/index.html第05行 $jssdk = new JSSDK("wx407e5e3a7f3e000a", "f2acd58e147500fb91eda296a2f8f492");修改为借用服务号的AppId和AppSecret
+3、游戏界面原作者使用了两个文件夹作不同的手机操作系统匹配，微赞暂时没办法使用上传覆盖指定文件夹的方法，或我看开发文档未留意到。我也正在解决这个图片后台定义的问题
+游戏界面文件夹分别：
+/addons/eudy_ads/template/mobile/resource/assets/750/ （Ios系统使用）
+/addons/eudy_ads/template/mobile/resource/assets/375_/（安卓系统使用）

@@ -1,0 +1,61 @@
+{template 'common/header'}
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" id="form1">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                模块设置 
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 邮箱SMTP</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="smtp" class="form-control" value="{$settings['smtp']}" />
+                    </div>
+                </div>
+             <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 邮箱用户</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="username" class="form-control" value="{$settings['username']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 邮箱密码</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="pwd" class="form-control" value="{$settings['pwd']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 种子接收邮箱</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="noticeemail" class="form-control" value="{$settings['noticeemail']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> Appid</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="appid" class="form-control" value="{$settings['appid']}" />
+                         <span class='help-block'>本模块使用内部资源，请仔细填写 Appid 和 Appsecret 否则会获取失败，请不要外传</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> Appsecret</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="appsecret" class="form-control" value="{$settings['appsecret']}" />
+                        <span class='help-block'>本模块使用内部资源，请仔细填写 Appid 和 Appsecret 否则会获取失败，请不要外传</span>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 引导关注连接</label>
+                    <div class="col-xs-12 col-sm-9">
+                        <input type="text" name="url" class="form-control" value="{$settings['url']}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+            <input type="hidden" name="token" value="{$_W['token']}" />
+        </div>
+    </form>
+</div>
+{template 'common/footer'}

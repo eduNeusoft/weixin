@@ -1,0 +1,66 @@
+{template 'common/header'}
+<div class="main">
+  <form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+    <div class="panel panel-default">
+      <div class="panel-heading">参数</div>
+      <div class="panel-body">
+      	<div class="form-group clearfix">
+          <label class="control-label col-md-2">首次签到积分</label>
+          <div class="col-md-3">
+            <input type="text" class="form-control" name="everyday" placeholder="默认赠送1积分" value="{$settings['everyday']}">
+			 <div class="help-block">默认赠送1积分。</div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">续签递增积分</label>
+          <div class="col-md-3">
+            <input type="text" class="form-control" name="continuity" placeholder="默认递增0积分" value="{$settings['continuity']}">
+			<div class="help-block">默认递增0积分，将递增值设为0，就是每次签到都是相同的数值，没有递增。</div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">签到成功提示语</label>
+          <div class="col-md-10">
+            <textarea class="form-control" name="success_msg" placeholder="">{$settings['success_msg']}</textarea>
+            <div class="help-block">例如：签到成功啦！你已获得[签到积分]积分。</div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">签到失败提示语</label>
+          <div class="col-md-10">
+            <textarea class="form-control" name="continuity_msg" placeholder="">{$settings['continuity_msg']}</textarea>
+            <div class="help-block">例如：您今天已经签到过了！明天再来吧！</div>
+          </div>
+        </div>
+
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">变量说明</label>
+          <div class="col-md-10">
+[总积分]：用户目前拥有的总积分<br>
+[签到积分]：当次签到所赠送的积分<br>
+[首次积分]：首次签到所赠送的积分<br>
+[续签积分]：连续签到所递增积分值<br>
+[下期积分]：下期签到将赠送的积分
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">规则说明</label>
+          <div class="col-md-10">
+用户第一天签到，就赠送“首次签到积分”，然后连续每天签到都将递增“续签递增积分”，如果中断，将重新回到“首次签到积分”，然后再重新递增<br>
+例如：首次签到积分为10；续签递增积分为2<br>
+那么用户第一天签到赠送10个积分，第二天12个积分，第二天14个积分 （10+12+14+16+18+20……）<br>
+但是如果有一天没签到（中断了）那么下次签到又从10分送起<br>
+好处：增加用户对公众号的粘性
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12 help-block">
+        <input type="submit" name="submit" value="提交" class="btn btn-primary"/>
+      </div>
+      <input type="hidden" name="token" value="{$_W['token']}"/>
+    </div>
+  </form>
+</div>
+{template 'common/footer'}

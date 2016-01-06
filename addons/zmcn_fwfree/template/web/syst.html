@@ -1,0 +1,69 @@
+
+      <div class="panel-body">
+      	<div class="form-group clearfix">
+          <label class="control-label col-md-2">允许重复查询次数</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="upperlimit" placeholder="默认0" value="{$settings['upperlimit']}" onkeyup="value=value.replace(/[^1234567890]+/g,'')" maxlength="10">
+			 <div class="help-block">设为0则为无限次重复，建议在10以内。</div>
+          </div>
+          <label class="control-label col-md-2">㫫示历史条数</label>
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="ishistory" placeholder="默认0,一般5条以内" value="{$settings['ishistory']}" onkeyup="value=value.replace(/[^1234567890]+/g,'')" maxlength="10">
+			 <div class="help-block">设为0则为不显示。</div>
+          </div>
+        </div>
+	
+      	<div class="form-group clearfix">
+          <label class="control-label col-md-2">商城商品快速录入</label>
+          <div class="col-md-4">
+				<select id="common_corp" class="form-control input-medium" name="isint">
+                    <option value="0" {if $settings['isint']==0}selected{/if}>关闭</option>
+                    {if pdo_tableexists('shopping_category')}<option value="1" {if $settings['isint']==1}selected{/if}>微商城</option>{/if}
+					<optgroup label="待增加...." />
+				</select>
+			 <div class="help-block">一键打通 微商城 分销商城....</div>
+          </div>
+		  
+		  {if $_W['role'] == "founder"  }
+          <label class="control-label col-md-2">手机端模板</label>
+          <div class="col-md-4">
+				<select id="common_corp" class="form-control input-medium" name="wapcss">
+					{loop $dirs $dir}
+						<option value="{$dir}" {if $settings['wapcss'] == $dir}selected{/if}>{$dir}</option>
+					{/loop}	
+				</select>
+			 <div class="help-block">只有站长能设置(可为每个客户个性化设计模板)</div>
+          </div>
+		  {/if}
+        </div>
+      	<div class="form-group clearfix">
+          <label class="control-label col-md-2">防串货功能</label>
+          <div class="col-md-4">
+				<select id="common_corp" class="form-control input-medium" name="ischuanhuo">
+                    <option value="0" {if $settings['ischuanhuo']==0}selected{/if}>关闭</option>
+                    <!---   option value="1" {if $settings['ischuanhuo']==1}selected{/if}>开启-大区域划分</option --->
+                    <!option value="2" {if $settings['ischuanhuo']==2}selected{/if}>开启-区域划分到省</option>
+                    <option value="3" {if $settings['ischuanhuo']==3}selected{/if}>开启-区域划分到市</option>
+				</select>
+          </div>
+          <label class="control-label col-md-2">异常通知微信ID</label>		  
+          <div class="col-md-4">
+            <input type="text" class="form-control" name="tongzi" placeholder="请填写：粉丝编号" value="{$settings['tongzi']}" >
+			 <div class="help-block">请在“粉丝营销”-“粉丝”中查到，点“查看详情”中的“粉丝编号”。</div>
+          </div>
+        </div>
+      	<div class="form-group clearfix">
+			<label class="control-label col-md-2">关注二维码</label>
+			<div class="col-sm-4">
+				{php echo tpl_form_field_image('link', $settings['link'], '', array('extras' => array('text' => 'readonly')))}
+			</div>
+         <label class="control-label col-md-2">扫码商品直达</label>
+          <div class="col-md-4">
+				<select id="common_corp" class="form-control input-medium" name="islink">
+                    <option value="0" {if $settings['islink']==0}selected{/if}>关闭</option>
+                    <option value="1" {if $settings['islink']==1}selected{/if}>直达</option>
+				</select>
+				<div class="help-block">起用商品直达则扫码后直达商品页面，防伪信息由官方公众号后台推送，这既能彻底杜绝造假分子利用 “仿站” 方法蒙骗消费者，又达到商品二次推广的效果。</div>
+          </div>	
+        </div>
+    </div>

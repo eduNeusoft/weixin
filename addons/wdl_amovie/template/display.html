@@ -1,0 +1,92 @@
+{template 'common/header'}
+<style>
+    .table td span{display:inline-block;}
+    .table td input{margin-bottom:0;}
+</style>
+ 
+<ul class="nav nav-tabs">
+    <li class="active"><a href="{php echo $this->createWebUrl('display')}">种子搜索器</a></li>
+ </ul>
+<div class="main">
+	<div class="panel panel-info">
+		<div class="panel-heading">筛选</div>
+		<div class="panel-body">
+			<form action="./index.php" method="get" class="form-horizontal" role="form">
+				<input type="hidden" name="c" value="site" />
+				<input type="hidden" name="a" value="entry" />
+				<input type="hidden" name="m" value="weihezi_survey" />
+				<input type="hidden" name="do" value="display" />
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">关键字</label>
+					<div class="col-xs-12 col-sm-8 col-lg-9">
+						<input class="form-control" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+					</div>
+					<div class=" col-xs-12 col-sm-2 col-lg-2">
+						<button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+    <div class="tags">
+    	<a style="color: #f15c5f; font-size: 55px; top: 80px; left: 125px;" href="2.html?wd=苍井空&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">苍井空</a>
+        <a style="color: #ef7c57; font-size: 40px; top: 96px; left: 288px;" href="2.html?wd=波多野结衣&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">波多野结衣</a>
+        <a style="font-size: 45px; color: #ffa95c; top: 135px; left: 169px;" href="2.html?wd=麻生希&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">麻生希</a>
+    	<a style="font-size: 35px; color: #4889e2; top: 43px; left: 156px;" href="2.html?wd=吉泽明步&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">吉泽明步</a>
+        <a style="font-size:36px; color: #236dd9; top: 54px; left: 370px;" href="2.html?wd=松岛枫&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">松岛枫</a> 
+        <a style="font-size: 19px; color: #f0517c; top: 42px; left: 97px;" href="2.html?wd=星野明&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">星野明</a>
+        <a style="font-size:18px; color: #d654b6; top: 19px; left: 180px;" href="2.html?wd=雨宫琴音&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">雨宫琴音</a>
+        <a style="font-size:20px; color: #e46744; top: 23px; left: 254px;" href="2.html?wd=麻美由真&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">麻美由真</a>
+        <a style="font-size:15px; color: #e76d9e; top: 7px; left: 300px;" href="2.html?wd=原纱央莉&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">原纱央莉</a>
+        <a style="font-size:30px; color: #ffd058; top: 21px; left: 373px;" href="2.html?wd=泷泽萝拉&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">泷泽萝拉</a>
+        <a style="font-size:17px; color: #ffa95c; top: 52px; left: 312px;" href="2.html?wd=并木优&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">并木优</a>
+        <a style="font-size:15px; color: #7f6eb5; top: 75px; left: 287px;" href="2.html?wd=希志爱野&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">希志爱野</a>
+        <a style="font-size: 25px; color: #097bf4; top: 96px; left: 34px;" href="2.html?wd=天海翼&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">天海翼</a>
+        <a style="font-size: 18px; color: #f295b9; left: 491px; top: 104px;" href="2.html?wd=樱井莉亚&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">樱井莉亚</a>
+        <a style="font-size:25px; color: #e76d9e; top: 140px; left: 93px;" href="2.html?wd=西野翔&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">西野翔</a>
+        <a style="font-size: 25px; color: #7f6eb5; left: 302px; top: 140px;" href="2.html?wd=冲田杏梨&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">冲田杏梨</a>
+        <a style="left: 403px; top: 139px; font-size: 25px; color: #cad38f;" href="2.html?wd=大桥未久&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">大桥未久</a>
+        <a style="top: 167px; left: 61px; font-size: 25px; color: #ff6b5b;" href="2.html?wd=橘梨纱&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">橘梨纱</a>
+        <a style=" top: 182px; left: 187px; font-size: 18px; color: #df7456; " href="2.html?wd=大泽佑香&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">大泽佑香</a>
+        <a style="font-size: 21px; color: #e6af56; left: 324px; top: 170px;" href="2.html?wd=小泽玛利亚&amp;rsv_bp=0&amp;ch=&amp;tn=baidu&amp;bar=&amp;rsv_spt=3&amp;ie=utf-8">小泽玛利亚</a>
+     </div>
+	<form action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-body table-responsive">
+				<table class="table table-hover">
+					<thead class="navbar-inner">
+					<tr>
+						<th style="width:200px;">调研活动名称</th>
+						<th style="width:260px;">直接链接</th>
+						<th style="width:200px;">启动时间</th>
+						<th style="width:200px; text-align:right;">操作</th>
+					</tr>
+					</thead>
+					<tbody>
+					{loop $ds $row}
+					<tr>
+						<td><a href="{php echo $this->createWebUrl('manage', array('id' => $row['sid']))}">{$row['title']}</a></td>
+						<td><input type="text" class="form-control" value="{$row['link']}" /></td>
+						<td>{if $row['isstart']}{php echo date('Y/m/d H:i:s', $row['starttime'])}{else}未开始{/if}</td>
+						<td style="text-align:right;">
+							<a href="{php echo $this->createWebUrl('manage', array('id' => $row['sid']))}" data-toggle="tooltip" data-placement="bottom" class="btn btn-default btn-small" title="调研详情"><i class="fa fa-search"></i></a>
+							<a href="{php echo $this->createWebUrl('post', array('id' => $row['sid']))}" data-toggle="tooltip" data-placement="bottom" class="btn btn-default btn-small" title="编辑"><i class="fa fa-edit"></i></a>
+							<a href="{php echo $this->createWebUrl('delete', array('id' => $row['sid']))}" onclick="return confirm('删除调研活动将删除所有关联的调研记录，确认吗？');
+                                    return false;" data-toggle="tooltip" data-placement="bottom" class="btn  btn-default btn-small" title="删除"><i class="fa fa-remove"></i></a>
+							<span data-toggle="tooltip" data-placement="bottom" class="btn btn-default btn-small switch" value="{$row['sid']}" {if $row['switch'] == 0}title="开启"><i class="fa fa-play"></i>
+							{else}title="关闭"><i class="fa fa-stop"></i>{/if}</span>
+						</td>
+					</tr>
+					{/loop}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
+</div>
+<script>
+	require(['bootstrap'],function($){
+		$('.btn').tooltip();
+	});
+</script>
+{template 'common/footer'}

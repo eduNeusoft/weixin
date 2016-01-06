@@ -1,0 +1,58 @@
+     <div class="panel-body">
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">查询回复模板</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="template_id" placeholder="默认：空" value="{$settings['template_id']}">		  
+            <div class="help-block">模板编号：OPENTM200605630(任务处理通知)</div>
+          </div>
+        </div>	 
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">首次查询回复</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="suc_one" placeholder="默认：密码正确，该码为首次查询，请放心使用！" value="{$settings['suc_one']}">		  
+            <div class="help-block">例如：密码正确，该码为首次查询，请放心使用！</div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">多次查询回复</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="suc_two" placeholder="默认：密码正确，该码为非首次查询，谨防假冒！" value="{$settings['suc_two']}">		  
+            <div class="help-block">例如：密码正确，该码为非首次查询，谨防假冒！</div>
+          </div>
+        </div>		
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">超限查询回复</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="suc_three" placeholder="默认：该码因查询次数过多，已经失效！" value="{$settings['suc_three']}">		  
+            <div class="help-block">例如：该码因查询次数过多，已经失效！</div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">密码错误提示语</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="con_msg" placeholder="默认：密码错误,查不到该密码!请仔细核对!" value="{$settings['con_msg']}">				
+            <div class="help-block">例如：密码错误,查不到该密码!请仔细核对!</div>
+          </div>
+        </div>
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">欢迎语标题</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="welcome" placeholder="默认：欢迎您进入本公司商品防伪查询!" value="{$settings['welcome']}">				
+            <div class="help-block">例如：欢迎您进入XX公司商品防伪查询!</div>
+          </div>
+        </div>	
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">欢迎语内容</label>
+          <div class="col-md-10">
+            <textarea class="form-control" name="welcometxt" placeholder="">{$settings['welcometxt']}</textarea>
+            <div class="help-block">尽量控制在150字以内，太长可能会影响性能！</div>
+          </div>
+        </div>	
+        <div class="form-group clearfix">
+          <label class="control-label col-md-2">查询附言</label>
+          <div class="col-md-10">
+            <input type="text" class="form-control" name="script" placeholder="默认：空!" value="{$settings['script']}">				
+            <div class="help-block">附在查询成功结果后面，可以是广告语，感谢语，提示语</div>
+          </div>
+        </div>			
+      </div>

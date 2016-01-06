@@ -1,0 +1,98 @@
+{template 'header'}
+  
+<style type="text/css">
+	*{-webkit-box-sizing: border-box;; margin:0; padding:0}
+.body{max-width:640px;margin:auto;min-height:100%;	position:relative;  min-width:320px;	display:block;	background-size:100% 100%;	-webkit-box-sizing: border-box;}
+/*list*/
+.body.list { background:#dadbdf;}
+.body.list .list_article li >div{ background:#fff;}
+.body.list .list_article li >div .text span{ border-color:#3f3f3f; color:#5b5b5f;}
+.body.list .list_article{ padding:15px 0 0 15px; overflow:hidden}
+.body.list .list_article li{ padding:0 15px 15px 0; width:50%; float:left;}
+.body.list .list_article li >div{ width:100%; height:100%;}
+.body.list .list_article li >div .imgdiv{  overflow:hidden}
+.body.list .list_article li >div .imgdiv img{ width:100% }
+.body.list .list_article li >div .text{  display:table-cell; vertical-align:middle; width:100%;}
+.body.list .list_article li >div .text span{ display:block; border-bottom:1px solid #3f3f3f; color:#5b5b5f; text-align:center; float:left; padding: 0 20px }
+.head{height:40px; line-height:40px; background: #1e81a7; padding:0 5px; color:#FFF;}
+.head .bn{display:inline-block; height:30px; line-height:30px; padding:0 10px; margin-top:4px; font-size:20px;  background:#11769C; color:#FFF; text-decoration:none;}
+.head .bn.pull-right{position:absolute; right:5px; top:0;}
+.head .title{font-size:14pt;display:block;padding-left:10px;font-weight:bolder;margin-right:49px;text-align:center;height:40px;line-height:40px;text-overflow:ellipsis;white-space:nowrap;overflow: hidden;}
+.head .order{background:#F9F9F9; position:absolute; z-index:9999; right:0;}
+.head .order li > a{display:block; padding:0 10px; min-width:100px; height:35px; line-height:35px; font-size:16px; color:#333; text-decoration:none; border-top:1px #EEE solid;}
+.head .order li.fa-caret-up{font-size:20px;color:#F9F9F9;position:absolute;top:-11px;right:16px;}
+.pager-position{width:100%;margin:0 auto;text-align:center;}
+.top{padding-bottom:5px!important;}
+.top a{font-size:12px;margin:5px auto;display:block;color:#fff;text-align:center;line-height:35px;background: #1e81a7;margin-bottom:-10px;}
+</style>
+<script>
+    window.onload=function(){
+        var h= $(".imgdiv").height()*0.4
+        $(".text").css("height",""+h+"px");
+        $(".text>span").css("padding-bottom",""+h/6+"px");
+        var size=12*h/55;
+        if(size<14) size=14
+        $(".text>span").css("font-size",""+size+"px");
+        var w =$(".imgdiv").width()-$(".text>span").width()-40;
+        $(".text").css("padding-left",""+w/2+"px");
+    }
+</script>
+<div class="head">
+    <a href="javascript:history.go(-1);" class="bn pull-left"><i class="fa fa-reply"></i></a>
+    <span class="title">{$title}</span>
+    <a href="javascript:;" id="category_show" class="bn pull-right"><i class="fa fa-reorder"></i></a>
+    <ul class="list-unstyled order hide">
+        <li class="fa fa-caret-up"></li>
+        {php $categorys = site_category();}
+            {loop $categorys $row}
+                <li>
+                    <a href="{php echo url('site/site/list', array('cid' => $row['id']))}">
+                        {$row['name']}
+                    </a>
+                </li>
+                {if !empty($row['children'])}
+                    {loop $row['children'] $item}
+                        <li>
+                            <a href="{php echo url('site/site/list', array('cid' => $item['id']))}">
+                                {$item['name']}
+                            </a>
+                        </li>
+                    {/loop}
+                {/if}
+            {/loop}
+    </ul>
+</div>
+<div data-role="container" class="body list">
+
+    <section data-role="body">
+        <ul class="list_article">
+    {php $result = site_article(array('cid' => $cid));}
+	{loop $result['list'] $row}
+         <li>
+                                <div>
+                               
+    <a href="{if !empty($row['linkurl'])}{$row['linkurl']}{else}{php echo murl('site/site/detail', array('id' => $row['id'], 'uniacid' => $_W['uniacid']))}{/if}">
+       {if $row['thumb']}<div class="imgdiv"><img src="{$row['thumb']}" onerror="this.parentNode.removeChild(this)"></div>{/if}
+                        <div class="text"><span>{$row['title']}</span></div>
+                    </a>
+                </div>
+            </li>
+    {/loop}
+                    </ul>
+    </section>
+        <div class="pager-position">{$result['pager']}</div>
+        </div>
+        <script>
+    require(['jquery'], function($){
+        $(function(){
+            $('#category_show').click(function(){
+                $('.head .order').toggleClass('hide');
+                return false;
+            });
+        });
+    });
+</script>
+<div class="top">
+    <a href="javascript:window.scrollTo(0,0);">返回顶部</a>
+</div>
+{template 'footer'}

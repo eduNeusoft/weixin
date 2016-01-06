@@ -1,0 +1,54 @@
+{template 'header'}
+<style>
+	body{
+	background-color:{if empty($_W['styles']['indexbgcolor'])}#370f05{else}{$_W['styles']['indexbgcolor']}{/if};
+	{$_W['styles']['indexbgextra']}
+	}
+	a{color:{$_W['styles']['linkcolor']}; text-decoration:none;}
+	{$_W['styles']['css']}
+	.footer{color:#dddddd;}
+</style>
+<link rel="stylesheet" type="text/css" href="{$_W['siteroot']}themes/mobile/xzz2/css/home-55.css" media="all" />
+<script type="text/javascript" src="{$_W['siteroot']}themes/mobile/xzz2/js/maivl.js"></script>
+<script type="text/javascript" src="{$_W['siteroot']}themes/mobile/xzz2/js/audio.js"></script>
+
+    <body onselectstart="return true;" ondragstart="return false;">
+        <div class="body">
+	<div class="snower">
+
+            <script type="text/javascript">var urls = new Array();urls.push('{$_W['siteroot']}themes/mobile/xzz2/img/v57_snow1.png');urls.push('{$_W['siteroot']}themes/mobile/xzz2/img/v57_snow2.png');urls.push('{$_W['siteroot']}themes/mobile/xzz2/img/v57_snow3.png');urls.push('{$_W['siteroot']}themes/mobile/xzz2/img/v57_snow4.png');</script>
+            <script type="text/javascript" src="{$_W['siteroot']}themes/mobile/xzz2/js/{$_W['styles']['xuehua']}.js"></script>
+        </div>
+    	<script>
+			window.addEventListener("DOMContentLoaded", function(){
+				playbox.init("playbox");
+			}, false);
+		</script>
+		<span id="playbox" style="right:10px;left:inherit;" class="btn_music" onclick="playbox.init(this).play();"><audio src="{$_W['styles']['music']}" loop id="audio"></audio></span>
+		<section>
+		<div>
+			<div class="header2">
+				<hgroup>
+					<h2>欢迎访问{$_W['account']['name']}微官网</h2>
+					<h4 style="font-size:12px">{$_W['styles']['kouhao']}</h4>
+				</hgroup>
+				<a href="tel:{$_W['styles']['tel']}"><span class="fa fa-phone-square"></span>&nbsp;联系电话:<p>{$_W['styles']['tel']}<p></a>
+				<figure style="background-image:url({if !empty($_W['styles']['indexbgimg'])}{$_W['styles']['indexbgimg']}{/if});">&nbsp;</figure>	
+			</div>
+			<ul class="list_ul">
+				{loop $navs $nav}
+								<li>
+					                        <a href="{$nav['url']}"
+                                                             style="background-image:url('{$_W['attachurl']}{$nav['icon']}');">
+						<label>{$nav['name']}</label>
+					</a>
+					<i></i>
+				</li>
+				{/loop}
+									
+							</ul>
+		</div>
+	</section>
+</div>
+<a href="{$_W['styles']['kfurl']}" style="position: fixed; right: 0px; top: 150px; z-index: 99999; height: 70px; width: 65px; min-width: 65px; background-image: url({$_W['siteroot']}themes/mobile/xzz2/img/kf.png); background-size: 65px; background-position: 0px 0px; background-repeat: no-repeat no-repeat;"></a>
+{template 'footer'}

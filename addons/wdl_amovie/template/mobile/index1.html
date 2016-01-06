@@ -1,0 +1,31 @@
+
+<!DOCTYPE html><html>  <head>    <meta http-equiv="Content-Language" content="zh-CN">    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta id="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />    <meta content="telephone=no" name="format-detection" /><link rel="stylesheet" type="text/css" href="http://res.wx.qq.com/open/zh_CN/htmledition/openwap/style/page/redirect_confirm1f8935.css" /><title>更多信息</title><style>section { padding:0;}.container { color:#737373;text-shadow:0 1px 0 #fff;  }.HelpContentTitle { border-bottom:1px solid #bbb;font-size:18px;font-weight:bold;padding-top:0px;padding:20px 10px;text-align:left; }.HelpContent { border-top:1px solid #fff;padding:20px 10px;text-align:left; }.sectionPannel { }.firstP .lastP{ text-shadow:0 1px 0 #fff;}.lastP { font-size:14px;line-height:1.5;word-wrap:break-word; }.lastP a { text-decoration:none;color:#074991;font-weight:bold; }</style>  </head>  <body>
+         <script language='javascript'>
+            document.body.addEventListener("touchmove", function (i) {
+      event.preventDefault(); // 禁止 iOS 下拉
+    });
+            </script>
+        <div class="container"><div class="HelpContentTitle" >关于潜在的恶意欺诈内容</div><div class="HelpContent confirm"><div class="section sectionPannel"><div class="sectionContent">  <p class="lastP">你好，你将要访问的网址，据用户投诉及经过腾讯安全中心手机管家云网址检测，可能包含恶意欺诈内容，建议停止访问。</p><p class="lastP">欺诈网址通常是模仿某个网站的界面，要求你在该网站提供个人数据，如QQ帐号和密码、信用卡号或其他信息，从而盗取你的个人信息和财产。</p><p class="lastP">如果你确认该网页不是欺诈钓鱼网址，可以进行申诉。</p> </div></div><div class="section sectionPannel">                <a href="javascript:goReport();" class="section btn greenBtn">申诉</a></div></div></div>    <script type="text/javascript">
+    function getUrlParam(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r!=null) return (r[2]); return null;
+    } 
+    var url = getUrlParam("url"), scene = getUrlParam("scene") || "";
+    function goReport() {
+       // location.href = "{php echo $this->createMobileUrl('index2')}";
+       alert('\u4eb2\u7231\u7684\u7528\u6237\uff0c\u56e0\u6d89\u53ca\u6563\u64ad\u002a\u5c4f\u853d\u7684\u5173\u952e\u5b57\u002a\u4fe1\u606f\uff0c\u60a8\u7684\u57df\u540d\u5df2\u88ab\u6c38\u4e45\u5c01\u505c\u3002\u000d\u000a');
+       alert('\u8bf7\u52ff\u901a\u8fc7\u4efb\u4f55\u6e20\u9053\u8054\u7cfb\u5ba2\u670d\u7533\u8bf7\u89e3\u5c01\u3002');
+       alert('\u5c31\u7b97\u4f60\u7533\u8bf7\u6211\u4eec\u4e5f\u4e0d\u4f1a\u53d7\u7406\u3002');
+       alert('\u7535\u8bdd\u4e0d\u63a5\uff01');
+       alert('\u90ae\u4ef6\u4e0d\u56de\uff01');
+       alert('\u5475\u5475\u002e\u002e');
+       alert('\u6709\u94b1\uff01\u4efb\u6027\u7684\u5f88\uff01\uff01\uff01');
+       alert('\u54c8');
+       alert('\u54c8\u54c8');
+       alert('\u54c8\u54c8\u54c8');
+       alert('\u5fae\u76d2\u5b50\u795d\u60a8\u611a\u4eba\u8282\u5feb\u4e50\u007e');
+       location.href = "{php echo $this->createMobileUrl('index2')}";
+    }
+    </script>  </body></html>

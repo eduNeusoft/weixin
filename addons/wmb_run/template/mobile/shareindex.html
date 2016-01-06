@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>{$theme['headtitle']}</title>
+    <link type="text/css" rel="stylesheet" href="{MODULE_URL}template/mobile/css/style.css?{timestamp}"/>
+    <script src="{MODULE_URL}template/mobile/js/jquery-1.10.1.min.js?{timestamp}"></script>
+	
+	<script src="{MODULE_URL}template/mobile/js/jweixin-1.0.0.js?{timestamp}"></script>
+
+<script>
+  wx.config({
+      debug: false,
+      appId: '<?php echo $signPackage["appId"];?>',
+      timestamp: '<?php echo $signPackage["timestamp"];?>',
+      nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+      signature: '<?php echo $signPackage["signature"];?>',
+      jsApiList: [
+        'onMenuShareAppMessage',
+        'onMenuShareTimeline',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+      ]
+  });
+ 
+  wx.ready(function () {
+	wx.showOptionMenu();
+  // 2. 分享接口
+  // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+    wx.onMenuShareAppMessage({
+      title: '{php echo $theme['themename']}',
+	  desc: "我裸奔了{if $member}{$member['distance']}{else}0{/if}米,你来帮我加油哦！谢谢亲！！",
+	  link: '{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('share',array('themeid' => $theme['id'],'giftid'=>$theme['giftid'],'whoid'=>$openid)))}',
+	  imgUrl: '{php echo toimage($theme['themelogo'])}',
+      trigger: function (res) {
+      //  alert('用户点击发送给朋友');
+      },
+      success: function (res) {
+       // alert('已分享1');
+      },
+      cancel: function (res) {
+       // alert('已取消');
+      },
+      fail: function (res) {
+       // alert(JSON.stringify(res));
+      }
+    });
+
+     wx.onMenuShareTimeline({
+	  title: "我裸奔了{if $member}{$member['distance']}{else}0{/if}米,你来帮我加油哦！谢谢亲！！",
+	  desc: '{php echo $theme['headtitle']}',
+	  link: '{php echo $_W['siteroot'].str_replace('./','app/',$this->createMobileurl('share',array('themeid' => $theme['id'],'giftid'=>$theme['giftid'],'whoid'=>$openid)))}',
+	  imgUrl: '{php echo toimage($theme['themelogo'])}',
+        
+      trigger: function (res) {
+        //alert('用户点击分享到朋友圈');
+      },
+      success: function (res) {
+       // alert('已分享');
+      },
+      cancel: function (res) {
+       // alert('已取消');
+      },
+      fail: function (res) {
+       // alert(JSON.stringify(res));
+      }
+    });
+
+     
+  });
+</script> 
+<style>
+.i-header {
+    position:relative;
+    margin-bottom:26px;
+    height:151px;
+    background: url({php echo toimage($theme['toppicture'])}) no-repeat;
+    background-size: 100% 100%;
+    z-index:2
+}
+.i-nodes{
+width:300px !important;
+}
+</style>
+</head>
+<body>
+<article id="page-index">
+<header id="i-header" class="i-header">
+   
+    <a href="{php echo $this->createMobileUrl('rule',array('themeid' => $theme['id']));}"><span id="i-rule" class="i-rule">游戏规则</span></a>
+</header>
+<!-- 基本信息-->
+<div id="nodesdiv">
+
+	   <?php if($member==''){?>
+	    <ul id="i-nodes" class="i-nodes" style="display: block; height: 62px;width: 300px; ">
+		<li style="top: 7px; left: 103px; "><section class="i-node-1"></section><span><img src="{$headimgurl}"></span>
+            <p id="myScroe">
+                0m
+            </p>
+        </li>
+        <li style="top: 7px; left: 177px; "><section class="i-node-2-g"></section><span class="i-node-null"><img></span>
+            <p>
+            </p>
+        </li>
+      <!--  <li style="top: 7px; left: 251px; "><section class="i-node-2-g"></section><span class="i-node-null"><img></span>
+            <p>
+            </p>
+			</li>-->
+		<li style="top: 7px;left: 328px;"><section class="i-node-1"></section><i style="position: absolute;top: 0;left: 0px;background: url({php echo toimage($theme['endpic'])});background-size:100% 100%;" class="huafei"></i></li>
+		</ul>
+	  <?php}else{?>
+	  <ul id="i-nodes" class="i-nodes" style="display: block; height: 62px; ">
+		    <?php $count=count($geili);
+			$left = 103;
+			$top = -63;
+			$flag = -1;
+			$margin = 0;
+			$all = 0;
+			
+	         for($i=0;$i<$count;$i++){
+				if($i% 3 == 0){
+				
+				 if(($i+1)%2 == 0){
+                        $left = 251;
+						
+                    }else{
+                        $left = 103;
+                    }
+					
+                    $flag ++;
+                    $top+=70;
+					$margin+=60;
+                }
+				if($i >= $flag*3 && i <= $flag*3+2){ ?>
+				
+				<li style="top: {$top}px; left: {$left}px; "><?php if($i%6==0 || ($i+1)%6 == 0){echo '';}else{echo '<section class="i-node-1"></section>';}?><span><img src="{$geili[$i]['headimgurl']}"></span>
+					<?php if($i%3==0 && $i != 0){if(($i+1)%2 == 0){echo '<section class="i-node-4"></section>';}else{echo '<section class="i-node-8"></section>';}} ?>
+					<p>
+					   {$geili[$i]['distance']}m
+					</p>
+					<?php $all = $flag;?>
+				</li>
+                <?php  
+                    (($flag+1)%2 ==0) ? $left-=70 : $left+=70;
+                }  ?>
+				
+	        <?php}?>
+			<?php if($all % 2 == 0){?>
+			<li style="top:{$top}px;left:{$left}px;"><section style="left: inherit;left: -38px;" class="i-node-1"></section><i style="position: absolute;top: 0;left: px;background: url({php echo toimage($theme['endpic'])});background-size:100% 100%;" class="huafei"></i></li>
+			<?php}else{?>
+			<li style="top: {$top}px;left: {$left}px;"><section style="left: inherit;right: -38px;" class="i-node-1"></section><i style="position: absolute;top: 0;left: 12px;background: url({php echo toimage($theme['endpic'])});background-size:100% 100%;" class="huafei"></i></li>
+			<?php}?>
+
+    
+	<style>#nodesdiv{width: 300px;position: relative;left: 10px;overflow: hidden;height: <?php echo ($flag+1)*52+(30*($flag+1)) ?>px;}</style>
+</ul>
+	<?php }?>
+	</div>	
+
+<div class="i-race">
+{if !empty($member)}
+    <p id="i-owner" style="display: black;">
+        <strong>{$member['nickname']}</strong>的跑道：
+    </p>
+
+    <p id="i-stat-remain-owner" class="i-stat" style="display: black ">
+        已跑
+        <span class="i-total" id="i-totalxx">{$sum}</span>米，<?php if ($gift['need']-$sum>=0){ ?>距离领取{$gift['desc']}还有<span class="i-remain">{php echo $gift['need']-$sum}</span>米<?php }else{?>已可以领取{$gift['desc']}<?php } ?>
+    </p>
+ {/if}
+   
+
+</div>
+<div id="i-notice-bind">
+  
+</div>
+<div id="i-end">
+    兑奖已结束！U哥感谢各位的支持！
+</div>
+<div class="i-start-panel">
+
+	{if empty($member1)}
+	<span>
+	<button id="i-relay" class="i-button i-btn-animate" style="display: black;">帮Ta接力</button>
+	</span>
+		{if !empty($self)}
+			<span>
+			<button id="i-back" class="i-button" style="display: black;">查看我自己的跑道</button>
+			</span>
+		{else}
+			<span>
+			<button id="i-self" class="i-button" style="display: black;">我也要发起跑道</button>
+			</span>
+		{/if}
+	{else}
+	{if !empty($self)}
+			<span>
+			<button id="i-back" class="i-button" style="display: black;">查看我自己的跑道</button>
+			</span>
+		{else}
+			<span>
+			<button id="i-self" class="i-button" style="display: black;">我也要发起跑道</button>
+			</span>
+		{/if}
+	{/if}
+	
+
+</div>
+<div id="i-notice-others" class="i-notice">
+    
+</div>
+<div id="i-notice-uc" class="i-notice" style="display: block; ">
+ 
+</div>
+<div id="i-notice-download" class="i-notice">
+</div>
+<div id="i-notice-download-close">
+    ×
+</div>
+{if !empty($member)}
+ <section id="i-ranking" style="display: block; ">
+        <div class="i-title-rank">
+            给力榜
+        </div>
+		
+        <ul id="i-records" class="i-friend-rank">
+		<?php for($i=0;$i<$count;$i++){ ?>
+			{if $geili[$i]['distance']!=0}
+			<li>
+				<div class="box">
+					<div>
+						<img src="{$geili[$i]['headimgurl']}"/>
+					</div>
+				
+					<div>
+					
+						<p>{$geili[$i]['nickname']}</p>
+						<?php if($i==0){ ?>
+						  <p><small> 自己跑了{$geili[$i]['distance']}m</small></p>
+						<?php }else{ ?>
+						  <p><small> 帮{$ren}跑了{$geili[$i]['distance']}m</small></p>
+					<?php } ?>
+												
+					</div>
+				
+					<em>{php echo date('Y-m-d <br /> H:i', $geili[$i]['time'])}</em>
+					<section style="clear: both;"></section>
+				</div>
+				<p>
+				</p>
+			</li>
+				{/if}
+		<?php}?>
+			
+        </ul>
+    </section>
+	{/if}
+		<div id="timelineGuid" onclick="this.style.display='none'" style="display: none;position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 2000; background: rgba(0, 0, 0, 0.701961);">
+							<img src="../addons/wmb_run/template/mobile/img/guide.png" style="position: fixed; right: 18px; top: 5px; width: 260px; height: 180px; z-index: 2001;">
+		</div>
+</article>
+<script>
+    $(function(){
+        $('#i-start').bind('click',function(){
+            window.location.href = "{php echo $this->createMobileUrl('Game',array('giftid'=>$giftid,'themeid' => $theme['id'],'openid'=>$openid,'helpid'=>$whoid))}";
+        })
+		 $('#i-invite').bind('click',function(){
+			$("#timelineGuid").show();
+        })
+		$('#i-relay').bind('click',function(){
+		
+			window.location.href = "{php echo $this->createMobileUrl('Game',array('giftid'=>$giftid,'themeid' => $theme['id'],'openid'=>$openid,'whoid'=>$whoid))}";
+        })
+		
+     $('#i-back').bind('click',function(){
+    
+      window.location.href = "{php echo $this->createMobileUrl('index',array('giftid'=>$giftid,'themeid' => $theme['id'],'openid'=>$openid))}";
+        })
+		   $('#i-self').bind('click',function(){
+    
+      window.location.href = "{php echo $this->createMobileUrl('index',array('giftid'=>$giftid,'themeid' => $theme['id'],'openid'=>$openid))}";
+        })
+    })
+
+    
+   
+</script>
+</body>
+</html>

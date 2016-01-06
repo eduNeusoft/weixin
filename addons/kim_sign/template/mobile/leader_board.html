@@ -1,0 +1,63 @@
+{template 'common/header'}
+        <style type="text/css">
+            .col-xs-3,.col-xs-2,.col-xs-5,.col-xs-7,.col-xs-6{padding: 0px 5px}
+        </style>
+<div class="main">
+    <div class="panel panel-info">
+        <div class="panel-heading">今日签到排行</div>
+        <ul class="list-group" style="margin: 10px auto">
+            {php $i=0}
+            {loop $list $item}
+            {php $u=getUserFieldsByUid($item['uid'],array('nickname','email'));}
+            <li class="list-group-item {if $i==0} list-group-item-danger {elseif $i==1} list-group-item-warning {elseif $i==2} list-group-item-success {elseif $i==3} list-group-item-info {/if}">
+                <div class="row">
+                    <div class="col-xs-3" style="text-align: center;font-weight: bold;">NO.{$item['rank']}</div>
+                    <div class="col-xs-7">
+                        {if empty($u['nickname'])}{$u['email']}{else}{$u['nickname']}{/if}
+                        {php $p=getUserTodayPrize($item['uid']);}
+                        {if !empty($p['prize_name'])}
+                        <span class="label label-danger" style="padding:.1em .2em .1em;font-weight:normal">中奖</span>
+                        {/if}
+                    </div>
+                    <div class="col-xs-2" style="text-align: right">{php echo date('H:i',$item['time'])}</div>
+                </div>
+            </li>
+            {php $i=$i+1}
+            {/loop}
+        </ul>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">用户积分排行</div>
+        <ul class="list-group" style="margin: 10px auto">
+            {php $i=0}
+            {loop $credit_list $item}
+            <li class="list-group-item {if $i==0} list-group-item-danger {elseif $i==1} list-group-item-warning {elseif $i==2} list-group-item-success {elseif $i==3} list-group-item-info {/if}">
+                <div class="row">
+                    <div class="col-xs-3" style="text-align: center;font-weight: bold;">NO.{php echo $i+1}</div>
+                    <div class="col-xs-6">{if empty($item['nickname'])}{$item['email']}{else}{$item['nickname']}{/if}</div>
+                    <div class="col-xs-3" style="text-align: right">{php echo intval($item['credit1'])} 积分</div>
+                </div>
+            </li>
+            {php $i=$i+1}
+            {/loop}
+        </ul>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading">总签到次数排行</div>
+        <ul class="list-group" style="margin: 10px auto">
+            {php $i=0}
+            {loop $sum_times_list $item}
+            {php $u=getUserFieldsByUid($item['uid'],array('nickname','email'));}
+            <li class="list-group-item {if $i==0} list-group-item-danger {elseif $i==1} list-group-item-warning {elseif $i==2} list-group-item-success {elseif $i==3} list-group-item-info {/if}">
+                <div class="row">
+                    <div class="col-xs-3" style="text-align: center;font-weight: bold;">NO.{php echo $i+1}</div>
+                    <div class="col-xs-6">{if empty($u['nickname'])}{$u['email']}{else}{$u['nickname']}{/if}</div>
+                    <div class="col-xs-3" style="text-align: right">{$item['sum_times']} 次</div>
+                </div>
+            </li>
+            {php $i=$i+1}
+            {/loop}
+        </ul>
+    </div>
+</div>
+{template 'common/footer'}

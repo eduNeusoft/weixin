@@ -1,0 +1,43 @@
+        {php $js_sign = getJSSDKSignPackage();}
+        {if !empty($js_sign)}
+        <script>
+            require(['wx'],function(wx){
+                wx.config({
+                    debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId: '{$js_sign[appId]}', // 必填，公众号的唯一标识
+                    timestamp: '{TIMESTAMP}', // 必填，生成签名的时间戳
+                    nonceStr: '{$js_sign[nonceStr]}', // 必填，生成签名的随机串
+                    signature: '{$js_sign[signature]}',// 必填，签名，见附录1
+                    jsApiList: ["getLocation","hideOptionMenu"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+                wx.ready(function(){
+                    wx.hideOptionMenu();
+//                    wx.error(function(res){
+//                        console.log(res);
+//                    });
+//                    wx.getLocation({
+//                        success: function (res) {
+//                            console.log(res.latitude);
+//                            var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+//                            var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+//                            var speed = res.speed; // 速度，以米/每秒计
+//                            var accuracy = res.accuracy; // 位置精度
+//                        }
+//                    });
+                });
+            });
+        </script>
+        {/if}
+        {if empty($footer_off)}
+            <div class="text-center">
+                <h5>&copy;{if empty($_W['account']['name'])} KimMx {else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}</h5>
+            </div>
+        {/if}
+        {if !empty($_W['quickmenu']['menus']) && empty($_W['quickmenu']['disabled'])}
+            <?php include_once template($_W['quickmenu']['template'], TEMPLATE_INCLUDEPATH);?>
+        {/if}
+        <script>require(['bootstrap']);</script>
+        </div>
+        {if $_W['page']['footer']}{$_W['page']['footer']}{/if}
+    </body>
+</html>

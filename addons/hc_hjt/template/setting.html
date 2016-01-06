@@ -1,0 +1,66 @@
+{template 'common/header'}
+<div class="main">
+	<form class="form-horizontal form" id="" action="" method="post">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				设置
+			</div>
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">游戏标题</label>
+					<div class="col-sm-9 col-xs-12">
+						<input class="form-control" name="hc_hjt_title" type="text" value="{if $subject['hc_hjt_title']}{$subject['hc_hjt_title']}{else}{$item['hc_hjt_title']}{/if}">
+					</div>	
+				</div>	
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享描述</label>
+					<div class="col-sm-9 col-xs-12">
+						<input class="form-control" name="share_desc" type="text" value="{if $subject['share_desc']}{$subject['share_desc']}{else}{$item['share_desc']}{/if}">
+					</div>	
+				</div>
+
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">引导关注连接</label>
+					<div class="col-sm-9 col-xs-12">
+						<input class="form-control" name="adurl" type="text" value="{if $subject['adurl']}{$subject['adurl']}{else}{$item['adurl']}{/if}">
+					</div>	
+				</div>			
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">分享后跳转链接</label>
+					<div class="col-sm-9 col-xs-12">
+						<input class="form-control" name="hc_hjt_url" type="text" value="{if $subject['hc_hjt_url']}{$subject['hc_hjt_url']}{else}{$item['hc_hjt_url']}{/if}">
+					</div>	
+				</div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-4 col-md-3 col-lg-2 control-label">分享到朋友圈图片</label>
+                    <div class="col-sm-8 col-xs-12">
+					{php echo tpl_form_field_image('photo',$subject['photo'])}
+                       
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"></label>
+                    <div class="col-sm-9 col-xs-12">
+                        <div class="help-block">直接提交即为默认图片</div>
+                    </div>
+                </div>
+	
+
+			</div>
+		</div>
+
+		<div class="form-group col-sm-12">
+			<input name="token" type="hidden" value="{$_W['token']}" />
+			<input type="submit" class="btn btn-primary col-lg-1" name="submit" value="提交" />
+		</div>
+	</form>
+</div>
+
+<script language='javascript'>
+require(['jquery', 'util'], function($, u) {
+	$(function() {
+
+	});
+});
+</script>
+{template 'common/footer'}

@@ -1,0 +1,162 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li {if $operation== 'post'}class="active"{/if}><a href="{php echo $this->createWebUrl('activity', array( 'op' => 'post'));}">添加游戏</a></li>
+	<li {if $operation== 'display'}class="active"{/if}><a
+		href="{php echo $this->createWebUrl('activity', array('op' => 'display'));}">管理</a></li>
+
+</ul>
+{if $operation == 'post'}
+
+ <div class="panel panel-default">
+	<form action="" method="post" class="form-horizontal form"
+		enctype="multipart/form-data">
+		<input type="hidden" name="id" value="{$item['id']}" />
+		<div class="panel-heading">活动添加</div>
+
+		<div class="panel-body">
+
+			<div class="form-group">
+				<label class="col-sm-1 control-label">游戏活动名称</label>
+				<div class="col-sm-5">
+					<input type="text" name="name" class="form-control"
+						value="{$item['name']}" > <span class="help-block"></span>
+				</div>
+			</div>
+            
+            <div class="form-group">
+					<label class="col-sm-1 control-label">分享时的提示</label>
+					<div class="col-sm-11">
+						<input name="fxname"
+								  value="{$item['fxname']}"  class="form-control" /><span class="help-block"></span>
+					</div>
+            </div>
+            
+<div class="form-group">
+				<label class="col-sm-1 control-label">引导连接</label>
+				<div class="col-sm-5">
+					<input type="text" name="link" class="form-control"
+						value="{$item['link']}" > <span class="help-block"></span>
+				</div>
+			</div>
+
+<div class="form-group">
+				<label class="col-sm-1 control-label">设置分享图标</label>
+				<div class="col-sm-11">
+					{php echo tpl_form_field_image('icon', $item['icon']);}
+				 <span class="help-block">建议宽*高=300*300</span>
+</div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label">分享二维码</label>
+				<div class="col-sm-11">
+					{php echo tpl_form_field_image('qrpic', $item['qrpic']);}
+                    <span class="help-block">参考图片：</span>
+<div class="input-group " style="margin-top:.5em;">
+<img src="/addons/eudy_ads/template/mobile/img/2c.png" class="img-responsive img-thumbnail"  width="150" /></div> 
+				</div>
+			</div>
+			
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label">登记信息背景</label>
+				<div class="col-sm-11">
+					{php echo tpl_form_field_image('bgpic', $item['bgpic']);}
+                     <span class="help-block">参考图片：</span>
+<div class="input-group " style="margin-top:.5em;">
+<img src="/addons/eudy_ads/template/mobile/img/gift1Bg.png" class="img-responsive img-thumbnail"  width="150" /></div> 
+				</div>
+			</div>
+            
+			<div class="form-group">
+				<label class="col-sm-1 control-label">游戏背景音乐</label>
+				<div class="col-sm-11">
+					{php echo tpl_form_field_audio('music', $item['music']);}
+				</div>
+			</div>
+
+            
+			<div class="form-group">
+				<div class="col-sm-11">
+					<input name="submit" type="submit" value="提交" class="btn btn-primary">
+				<input type="hidden" name="token" value="{$_W['token']}" />
+				</div>
+				
+			</div>
+			
+		
+		
+			
+		
+
+
+		</div>
+
+	</form>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+	
+	require(['jquery','util'], function($, util){
+		$(function(){
+			var editor = util.editor($(".richtext")[0]);
+	 
+			
+		});
+	});
+	
+
+
+</script>
+
+{elseif $operation == 'display'}
+<div class="main">
+
+	<div style="padding: 15px;">
+		<table class="table table-hover table-striped table-condensed">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="text-align: center;width: 200px">名称</th>
+                    <th style="text-align: center;width: 500px">素材连接</th>
+					<th style="text-align: center; min-width: 500px;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+					<td style="text-align: center;"><a href="{php echo $this->createWebUrl('activity', array('id' => $item['id'], 'op' => 'post'))}" target="_blank">{$item['name']}</td>
+					
+	
+					<td style="text-align: center;">{$item['link']}</td>
+
+					<td style="text-align: center;">
+					<a
+						href="{php echo $this->createWebUrl('applyManger', array('name' => 'pingtu', 'aid' => $item['id']))}"
+						title="报名用户" class="btn btn-small">报名用户</a>
+
+						<a
+						href="{php echo $this->createWebUrl('activity', array('id' => $item['id'], 'op' => 'post'))}"
+						title="编辑" class="btn btn-small"><i class="glyphicon glyphicon-edit"></i></a> 
+                        <a
+						href="{php echo $this->createWebUrl('activity', array('id' => $item['id'], 'op' => 'delete'))}"
+						onclick="return confirm('此操作不可恢复，确认删除？');return false;" title="删除"
+						class="btn btn-small"><i class="glyphicon glyphicon-remove"></i></a>
+						
+						</td>
+				</tr>
+				{/loop}
+			</tbody>
+
+		</table>
+		{$pager}
+	</div>
+</div>
+{/if} {template 'common/footer'}

@@ -1,0 +1,37 @@
+{template 'common/header'}
+<div class="main">
+    <div class="panel panel-success">
+        <div class="panel-heading">恭喜您中奖啦</div>
+        <ul class="list-group" style="margin: 10px auto">
+            <li style="text-align: center;font-size:24px;margin: 10px;color: #008000">
+                恭喜获得 <br/>{$prize['prize_name']}
+            </li>
+            <li style="text-align: center;color: #c7254e;font-size:24px;margin: 10px;border: 1px solid #ffCE89" >
+                {$prize['record']['code']}
+            </li>
+            <li style="margin: 10px">
+                中奖时间:&nbsp;&nbsp;
+                {php echo date('Y-m-d',$prize['record']['winning_time'])}<br/>
+                有效时间:&nbsp;&nbsp;
+                {php echo date('Y-m-d',($prize['record']['winning_time']+(24*3600)))}<br/>
+                当前状态:&nbsp;&nbsp;
+                {if ($prize['record']['winning_time']+(24*3600)) < TIMESTAMP}
+                <span class="label label-default" style="padding:.1em .2em .1em;font-weight:normal">过期</span>
+                {elseif $prize['record']['status'] == 1}
+                <span class="label label-info" style="padding:.1em .2em .1em;font-weight:normal">未领</span>
+                {elseif $prize['record']['status'] == -2}
+                <span class="label label-danger" style="padding:.1em .2em .1em;font-weight:normal">放弃</span>
+                {else}
+                <span class="label label-success" style="padding:.1em .2em .1em;font-weight:normal">已领</span>
+                {/if}
+            </li>
+            <li>
+                <code>请在规定时间内领取,过期视为放弃！</code>
+            </li>
+        </ul>
+        <hr/>
+        <h5 style="margin-left: 15px;font-weight: bold;font-size: 14px">领取步骤:</h5>
+        <pre style="margin: 20px">{$prize['description']}</pre>
+    </div>
+</div>
+{template 'common/footer'}

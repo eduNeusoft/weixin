@@ -1,0 +1,21 @@
+/*
+ *  SliderNav - A Simple Content Slider with a Navigation Bar
+ *  Copyright 2010 Monjurul Dolon, http://mdolon.com/
+ *  Released under the MIT, BSD, and GPL Licenses.
+ *  More information: http://devgrow.com/slidernav
+ */
+body{ overflow: hidden;}
+.sliders {  min-height: 250px; display: block; position: relative; background: #fff; overflow: hidden; }
+.slider ul { list-style: none; }
+.slider-content { width: 100%; display: block; overflow: auto; min-height: 250px; }
+.slider-content ul {  width: 100%; display: block; position: relative; padding-left: 0; }
+.slider-content ul li {  width: 100%; margin-bottom: 10px;}
+.slider-content ul li .thumbnail{ margin: 0 5px; }
+.slider-content .selected { background: #ccc; }
+.sliders .slider-nav { position: absolute; right: 0; top: 0; min-height: 250px; }
+.sliders .slider-nav ul { padding: 5px 0; }
+.sliders .slider-nav li a { padding: 0.8px 5px; line-height: 1.0; font-size: 12px; text-align: center; color: #3e5976; font-weight: bold; display: block; text-decoration: none; text-transform: uppercase; cursor: pointer; }
+.sliders #debug { position: absolute; bottom: 0; left: 0; padding: 5px; background: #000; color: #fff; }
+.sliders .arrow { font-size: 0px; line-height: 0%; width: 0px; border-bottom: 8px solid #fff; border-left: 5px solid #333; border-right: 5px solid #333; position: relative; top: 5px; }
+.sliders .down { border-bottom: none; border-top: 8px solid #fff; top: 15px; }
+.sliders .slide-up, .slider .slide-down { height: 20px; background: #333; text-align: center; cursor: pointer; float: right; width: 100%; position: relative; }
